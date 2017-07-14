@@ -3,7 +3,7 @@
 return [
 'db' => [
 	'driver' => 'Pdo',
-	'dsn' => 'mysql:dbname=pokemon_zend;host=localhost',
+	'dsn' => 'mysql:dbname=pokedex_zend;host=localhost',
 	'username' => 'root',
 	'password' => '',
 	'driver_options' => [

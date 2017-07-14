@@ -1,0 +1,31 @@
+<h3>Type</h3>
+<a class="btn btn-primary" href="<?php echo $this->url("type_add"); ?>">Ajouter un Type !</a>
+
+<?php if (!empty($this->types)) : ?>
+    <?php foreach ($this->types as $type) : ?>
+        <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <strong>
+                    <a href="<?php echo $this->url(
+                      'type_show', [
+                        'typeName' => $type->getName()
+                      ]); ?>">
+                      <?php echo $this->escapeHtml($type->getName()); ?>
+                    </a>
+                </strong>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else : ?>
+    <div>Aucun Type à afficher</div>
+<?php endif; ?>
+<hr />
+<?php
+    echo $this->paginationControl(
+      $this->types,
+      'Sliding',
+      'partial/pagination',
+      ['route' => 'type_home/paged']
+    );
+?>

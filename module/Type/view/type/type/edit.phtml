@@ -1,0 +1,15 @@
+<?php
+$form = $this->form;
+$form->prepare();
+?>
+<h1>Moodification d'un Type</h1>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<div class="form-group">
+    <?php echo $this->formRow($form->get('name')); ?>
+</div>
+
+<?php echo $this->formRow($form->get('id')); ?>
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>

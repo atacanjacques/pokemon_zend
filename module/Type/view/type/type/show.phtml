@@ -1,0 +1,10 @@
+<?php
+$type = $this->type;
+?>
+<h1><?php echo $this->escapeHtml($type->getName()); ?></h1>
+<a class="btn btn-primary" href="<?php echo $this->url('type_edit', ['typeId' => $type->getId()]); ?>">
+  <i class="glyphicon glyphicon-pencil"></i> Modifier
+</a>
+<a class="btn btn-danger" href="<?php echo $this->url('type_delete', ['typeId' => $type->getId()]) ;?>">
+  <i class="glyphicon glyphicon-remove"></i> supprimer
+</a>

@@ -1,0 +1,13 @@
+<h3>Ajout d'un Type</h3>
+
+<?php
+  $form = $this->form;
+  $form->prepare();
+  echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('name')); ?>
+</div>
+
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>
