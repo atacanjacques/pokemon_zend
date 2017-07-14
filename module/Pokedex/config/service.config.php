@@ -1,14 +1,14 @@
 <?php
 
-namespace Pokemon;
+namespace Pokedex;
 return [
   'invokables' => [
-    'Pokemon\Repository\PokemonRepository' => 'Pokemon\Repository\PokemonRepositoryImpl'
+    'Pokedex\Repository\PokemonRepository' => 'Pokedex\Repository\PokemonRepositoryImpl'
   ],
   'factories' => [
-    'Pokemon\Service\PokemonService' => function(\Zend\ServiceManager\ServiceManager $sl) {
-        $pokemonService = new \Pokemon\Service\PokemonServiceImpl();
-        $pokemonService->setPokemonRepository($sl->get('Pokemon\Repository\PokemonRepository'));
+    'Pokedex\Service\PokemonService' => function(\Zend\ServiceManager\ServiceManager $sl) {
+        $pokemonService = new \Pokedex\Service\PokemonServiceImpl();
+        $pokemonService->setPokemonRepository($sl->get('Pokedex\Repository\PokemonRepository'));
         return $pokemonService;
     }
   ],

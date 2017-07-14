@@ -29,5 +29,5 @@ return [
     'Zend\Validator',
     'ZendDeveloperTools',
     'Application',
-    'Pokemon',
+    'Pokedex',
 ];

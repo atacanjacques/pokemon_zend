@@ -1,8 +1,8 @@
 <?php
 
-namespace Pokemon\Entity\Hydrator;
+namespace Pokedex\Entity\Hydrator;
 
-use Pokemon\Entity\Pokemon;
+use Pokedex\Entity\Pokemon;
 use Zend\Hydrator\HydratorInterface;
 
 class PokemonHydrator implements HydratorInterface

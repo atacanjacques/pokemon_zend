@@ -1,9 +1,9 @@
 <?php
 
-namespace Pokemon\Service;
+namespace Pokedex\Service;
 
-use Pokemon\Entity\Pokemon;
-use Pokemon\Service\PokemonService;
+use Pokedex\Entity\Pokemon;
+use Pokedex\Service\PokemonService;
 
 class PokemonServiceImpl implements PokemonService
 {

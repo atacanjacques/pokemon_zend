@@ -1,17 +1,17 @@
 <?php
 
-namespace Pokemon;
+namespace Pokedex;
 
 return [
   // routes
   'router' => [
     'routes' => [
-      'pokemon_home' => [
+      'pokedex_home' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokemon',
+          'route' => '/pokedex',
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Index',
+            'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'index'
           ],
         ],
@@ -23,32 +23,35 @@ return [
                     'route' => '/page/:page' ,
                     'constraints' => [ 'page' => '[0-9]+' ],
                     'defaults' => [
-                        'controller' => 'Pokemon\Controller\Index',
+                        'controller' => 'Pokedex\Controller\Index',
                         'action' => 'index'
                     ]
                 ]
             ]
         ]
       ],
+
+      // pokemon
       'pokemon_add' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokemon/add',
+          'route' => '/pokedex/pokemon/add',
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Index',
+            'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'add'
           ]
-        ]
+        ],
+        'priority' => 1
       ],
       'pokemon_edit' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokemon/edit/:pokemonId',
+          'route' => '/pokedex/pokemon/edit/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Index',
+            'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'edit'
           ]
         ]
@@ -56,12 +59,12 @@ return [
       'pokemon_delete' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokemon/delete/:pokemonId',
+          'route' => '/pokedex/pokemon/delete/:pokemonId',
           'constraints' => [
             'pokemonId' => '[0-9]+'
           ],
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Index',
+            'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'delete'
           ]
         ]
@@ -69,22 +72,24 @@ return [
       'pokemon_show' => [
         'type' => 'Segment',
         'options' => [
-          'route' => '/pokemon/:pokemonName',
+          'route' => '/pokedex/pokemon/:pokemonName',
           'contraints' => [
             'pokemonName'      => '[a-zA-Z0-9-]+',
           ],
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Index',
+            'controller'  => 'Pokedex\Controller\Index',
             'action'      => 'show'
           ]
         ]
       ],
+
+      // api
       'api_pokemon' => [
         'type'  => 'Segment',
         'options' => [
-          'route' => '/api/pokemon/[/:id]',
+          'route' => '/api/pokedex/pokemon/:id',
           'defaults' => [
-            'controller'  => 'Pokemon\Controller\Pokemon'
+            'controller'  => 'Pokedex\Controller\Pokemon'
           ]
         ]
       ],
@@ -94,8 +99,8 @@ return [
   // controllers
   'controllers' => [
     'factories' => [
-      'Pokemon\Controller\Index' => 'Pokemon\Controller\IndexControllerFactory',
-      'Pokemon\Controller\Pokemon' => 'Pokemon\Controller\PokemonControllerFactory',
+      'Pokedex\Controller\Index' => 'Pokedex\Controller\IndexControllerFactory',
+      'Pokedex\Controller\Pokemon' => 'Pokedex\Controller\PokemonControllerFactory',
     ]
   ],
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pokemon;
+namespace Pokedex;
 
 class Module
 {

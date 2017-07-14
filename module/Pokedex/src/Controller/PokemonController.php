@@ -1,11 +1,11 @@
 <?php
 
-namespace Pokemon\Controller;
+namespace Pokedex\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
-use Pokemon\Entity\Pokemon;
-use Pokemon\Entity\Category;
+use Pokedex\Entity\Pokemon;
+// use Pokedex\Entity\Category;
 use Zend\Cache\StorageFactory;
 
 class PokemonController extends AbstractRestfulController

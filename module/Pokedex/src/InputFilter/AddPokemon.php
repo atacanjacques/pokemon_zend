@@ -1,5 +1,5 @@
 <?php
-namespace Pokemon\InputFilter;
+namespace Pokedex\InputFilter;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Input;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Pokemon\Controller;
+namespace Pokedex\Controller;
 
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Pokemon\Form\Add;
-use Pokemon\Form\Edit;
-use Pokemon\InputFilter\AddPokemon;
-use Pokemon\Entity\Pokemon;
+use Pokedex\Form\Add;
+use Pokedex\Form\Edit;
+use Pokedex\InputFilter\AddPokemon;
+use Pokedex\Entity\Pokemon;
 
 class IndexController extends AbstractActionController
 {
@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController
     ];
 
     if ($this->request->isPost()) {
-        $pokemonPost = new Post();
+        $pokemonPost = new Pokemon();
         $form->bind($pokemonPost);
 
         $form->setInputFilter(new AddPokemon());
@@ -52,7 +52,7 @@ class IndexController extends AbstractActionController
         if ($form->isValid()) {
           $this->pokemonService->save($pokemonPost);
 
-          return $this->redirect()->toRoute('pokemon_home');
+          return $this->redirect()->toRoute('pokedex_home');
         }
     }
 
@@ -75,7 +75,7 @@ class IndexController extends AbstractActionController
   public function deleteAction()
   {
     $this->pokemonService->delete($this->params()->fromRoute('pokemonId'));
-    $this->redirect()->toRoute('pokemon_home');
+    $this->redirect()->toRoute('pokedex_home');
   }
 
   public function editAction()
@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
       $form->setData($data);
       if ($form->isValid()) {
         $this->pokemonService->update($pokemonPost);
-        return $this->redirect()->toRoute('pokemon_home');
+        return $this->redirect()->toRoute('pokedex_home');
       }
     }
     else

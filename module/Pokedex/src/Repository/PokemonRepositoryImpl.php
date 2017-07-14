@@ -1,14 +1,14 @@
 <?php
 
-namespace Pokemon\Repository;
+namespace Pokedex\Repository;
 
-// use Pokemon\Entity\Hydrator\CategoryHydrator;
-use Pokemon\Entity\Hydrator\PokemonHydrator;
+// use Pokedex\Entity\Hydrator\CategoryHydrator;
+use Pokedex\Entity\Hydrator\PokemonHydrator;
 use Zend\Hydrator\Aggregate\AggregateHydrator;
 use Zend\Db\ResultSet\HydratingResultSet;
-use Pokemon\Repository\PokemonRepository;
+use Pokedex\Repository\PokemonRepository;
 use Zend\Db\Adapter\AdapterAwareTrait;
-use Pokemon\Entity\Pokemon;
+use Pokedex\Entity\Pokemon;
 
 class PokemonRepositoryImpl implements PokemonRepository
 {

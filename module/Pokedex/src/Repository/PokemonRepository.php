@@ -1,9 +1,9 @@
 <?php
 
-namespace Pokemon\Repository;
+namespace Pokedex\Repository;
 
 use Application\Repository\RepositoryInterface;
-use Pokemon\Entity\Pokemon;
+use Pokedex\Entity\Pokemon;
 
 interface PokemonRepository extends RepositoryInterface
 {

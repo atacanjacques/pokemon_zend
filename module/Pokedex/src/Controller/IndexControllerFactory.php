@@ -1,6 +1,6 @@
 <?php
 
-namespace Pokemon\Controller;
+namespace Pokedex\Controller;
 
 use Interop\Container\ContainerInterface;
 
@@ -8,6 +8,6 @@ class IndexControllerFactory
 {
   public function __invoke(ContainerInterface $container)
   {
-    return new IndexController($container->get('Pokemon\Service\PokemonService'));
+    return new IndexController($container->get('Pokedex\Service\PokemonService'));
   }
 }

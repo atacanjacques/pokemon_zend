@@ -1,8 +1,8 @@
 <?php
 
-namespace Pokemon\Service;
+namespace Pokedex\Service;
 
-use Pokemon\Entity\Pokemon;
+use Pokedex\Entity\Pokemon;
 
 interface PokemonService
 {
