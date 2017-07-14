@@ -1,0 +1,19 @@
+<h3>Ajout d'un Pokémon</h3>
+
+<?php
+  $form = $this->form;
+  $form->prepare();
+  echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('national_id')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('name')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('description')); ?>
+</div>
+
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>
