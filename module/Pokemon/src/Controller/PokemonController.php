@@ -23,15 +23,53 @@ class PokemonController extends AbstractActionController
 
   public function indexAction()
   {
-      $pokemons = $this->pokemonService->fetch(
-          $this->params()->fromRoute('page')
+    $types = $this->typeService->fetchAll();
+    $allTypes = [0 => "Aucun"];
+    foreach($types as $type){
+      $allTypes[$type->getId()] = $type->getName();
+    }
+
+    $pokemons = $this->pokemonService->fetch(
+      $this->params()->fromRoute('page')
       );
 
-      $variables = [
-        'pokemons' => $pokemons
-      ];
 
-      return new ViewModel($variables);
+    $pokemonTypes = [];
+    foreach($pokemons as $pokemon){
+      $pokemonType = [];
+
+      foreach($types as $type){
+        if( ($type->getId() == intval($pokemon->getType1())) || ($type->getId() == intval($pokemon->getType2())) ){
+          array_push($pokemonType, $type->getName());
+        }
+      }
+      $pokemonTypes[$pokemon->getId()] = $pokemonType;
+    }
+
+
+$pokemonsIds = [];
+foreach ($pokemons as $pokemon) {
+array_push($pokemonsIds, $pokemon->getId());
+}
+
+$pokemonEvolutions = [];
+foreach ($pokemonsIds as $pokemonsId) {
+    $pokemonEvolution = [];
+    foreach($pokemons as $pokemon){
+      if($pokemon->getPreviousPokemon() == $pokemonsId){
+        array_push($pokemonEvolution, $pokemon->getName());
+      }
+    }
+      $pokemonEvolutions[$pokemonsId] = $pokemonEvolution;
+  }
+
+    $variables = [
+    'pokemonTypes' => $pokemonTypes,
+    'pokemonEvolutions' => $pokemonEvolutions,
+    'types' => $types,
+    'pokemons' => $pokemons
+    ];
+    return new ViewModel($variables);
   }
 
   public function addAction()
@@ -52,23 +90,23 @@ class PokemonController extends AbstractActionController
     $form = new Add($allTypes, $allPokemons);
 
     $variables = [
-      'form' => $form
+    'form' => $form
     ];
 
     if ($this->request->isPost()) {
-        $pokemonPost = new Pokemon();
-        $form->bind($pokemonPost);
+      $pokemonPost = new Pokemon();
+      $form->bind($pokemonPost);
 
-        $form->setInputFilter(new AddPokemon());
+      $form->setInputFilter(new AddPokemon());
 
-        $data = $this->request->getPost();
-        $form->setData($data);
+      $data = $this->request->getPost();
+      $form->setData($data);
 
-        if ($form->isValid()) {
-          $this->pokemonService->save($pokemonPost);
+      if ($form->isValid()) {
+        $this->pokemonService->save($pokemonPost);
 
-          return $this->redirect()->toRoute('pokemon_home');
-        }
+        return $this->redirect()->toRoute('pokemon_home');
+      }
     }
 
     return new ViewModel($variables);
@@ -76,15 +114,49 @@ class PokemonController extends AbstractActionController
 
   public function showAction()
   {
+
+    $types = $this->typeService->fetchAll();
+    $allTypes = [0 => "Aucun"];
+    foreach($types as $type){
+      $allTypes[$type->getId()] = $type->getName();
+    }
+
+    $pokemons = $this->pokemonService->fetchAll();
+    $allPokemons = [0 => "Aucun"];
+    foreach($pokemons as $pokemon){
+      $allPokemons[$pokemon->getId()] = $pokemon->getName();
+    }
+
     $pokemon = $this->pokemonService->find(
       $this->params()->fromRoute('pokemonName')
-    );
+      );
 
     if (is_null($pokemon)) {
       $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
     }
 
-    return new ViewModel(['pokemon' => $pokemon]);
+    $evolutions = [];
+    foreach($pokemons as $pokemonBis){
+      if($pokemonBis->getPreviousPokemon() == $pokemon->getId()){
+        array_push($evolutions, $pokemonBis->getName());
+      }
+    }
+
+    $pokemonTypes = [];
+    foreach($types as $type){
+      if( ($type->getId() == intval($pokemon->getType1())) || ($type->getId() == intval($pokemon->getType2())) ){
+        array_push($pokemonTypes, $type->getName());
+      }
+    }
+
+    $variables = [
+    'pokemonTypes' => $pokemonTypes,
+    'evolutions' => $evolutions,
+    'pokemon' => $pokemon,
+    'pokemons' => $pokemons
+    ];
+
+    return new ViewModel($variables);
   }
 
   public function deleteAction()
@@ -124,18 +196,18 @@ class PokemonController extends AbstractActionController
     }
     else
     {
-        $pokemon = $this->pokemonService
-          ->findById(
-            $this->params()->fromRoute('pokemonId')
+      $pokemon = $this->pokemonService
+      ->findById(
+        $this->params()->fromRoute('pokemonId')
         );
-        if (is_null($pokemon)) {
-          $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-        } else {
-          $form->bind($pokemon);
-          $form->get('name')->setValue($pokemon->getName());
-          $form->get('id')->setValue($pokemon->getId());
-        }
+      if (is_null($pokemon)) {
+        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+      } else {
+        $form->bind($pokemon);
+        $form->get('name')->setValue($pokemon->getName());
+        $form->get('id')->setValue($pokemon->getId());
       }
+    }
     return new ViewModel($variables);
   }
 }

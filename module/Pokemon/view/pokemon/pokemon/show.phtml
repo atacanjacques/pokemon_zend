@@ -1,20 +1,38 @@
 <?php
 $pokemon = $this->pokemon;
 ?>
-<h1><?php echo $this->escapeHtml($pokemon->getName()); ?></h1>
-<p>Type 1 : <?php echo $pokemon->getType1(); ?></p>
-<p>Type 1 : <?php echo $pokemon->getType2(); ?></p>
-<p>Evolution precedente : <?php echo $pokemon->getPreviousPokemon(); ?></p>
 
-<a class="btn btn-primary" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]); ?>">
-  <i class="glyphicon glyphicon-pencil"></i> Modifier
-</a>
-<a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
-  <i class="glyphicon glyphicon-remove"></i> supprimer
-</a>
-<hr />
-<div class="row">
-  <div class="col-md-12">
-    <?php echo nl2br($this->escapeHtml($pokemon->getDescription())); ?>
-  </div>
-</div>
+<h1>Fiche du Pokémon : <?php echo $this->escapeHtml($pokemon->getName()); ?></h1>
+<p>
+	<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png" />
+</p>
+<p><b>Nom : </b> <?php echo $this->escapeHtml($pokemon->getName()); ?></p>
+<p><b>Type : </b> <?php echo !empty($pokemonTypes) ? join(', ', $pokemonTypes) : "Aucun"; ?></p>
+<p>
+	<b>Évolution direct : </b>
+	<?php
+	if(!empty($evolutions)){
+		$i = 0;
+		$len = count($evolutions) - 1;
+		foreach($evolutions as $evolution){
+			echo '<a href="' . $this->url('pokemon_show', ['pokemonName' => $evolution]) . '">' . $evolution . '</a>';
+			if($i != $len){
+				echo ", ";
+			}
+			$i++;
+		}
+	}
+	else{
+		echo "Aucun";
+	}
+	?>
+</p>
+
+<p>
+	<a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
+		<i class="glyphicon glyphicon-pencil"></i> Modifier
+	</a>
+	<a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
+		<i class="glyphicon glyphicon-remove"></i> Supprimer
+	</a>
+</p>

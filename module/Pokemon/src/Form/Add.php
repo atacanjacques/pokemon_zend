@@ -35,10 +35,6 @@ class Add extends Form
     $description->setLabel('Description');
     $description->setAttribute('class', 'form-control');
 
-    $submit = new Element\Submit('submit');
-    $submit->setValue('Ajouter le Pokémon !');
-    $submit->setAttribute('class', 'btn btn-primary');
-
     $type1 = new Element\Select('type1');
     $type1->setLabel('Type 1');
     $type1->setAttribute('class', 'form-control');
@@ -53,6 +49,10 @@ class Add extends Form
     $previous_pokemon->setLabel('Évolution précedente');
     $previous_pokemon->setAttribute('class', 'form-control');
     $previous_pokemon->setValueOptions($allPokemons);
+
+    $submit = new Element\Submit('submit');
+    $submit->setValue('Ajouter le Pokémon');
+    $submit->setAttribute('class', 'btn btn-success');
 
     $this->add($national_id);
     $this->add($name);

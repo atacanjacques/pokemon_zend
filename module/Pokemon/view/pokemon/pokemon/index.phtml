@@ -1,34 +1,77 @@
-<h3>Pokemon</h3>
-<a class="btn btn-primary" href="<?php echo $this->url("pokemon_add"); ?>">Ajouter un Pokémon !</a>
+<h1>Liste des Pokémons</h1>
 
 <?php if (!empty($this->pokemons)) : ?>
-    <?php foreach ($this->pokemons as $pokemon) : ?>
-        <hr />
-        <div class="row">
-            <div class="col-md-5">
-    <img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png" style="width: 40px;height: 40px;">  
-    </div>
-            <div class="col-md-5">
-                <strong>
-                    <a href="<?php echo $this->url(
-                      'pokemon_show', [
-                        'pokemonName' => $pokemon->getName()
-                      ]); ?>">
-                      <?php echo $this->escapeHtml($pokemon->getName()); ?>
-                    </a>
-                </strong>
-            </div>
-        </div>
-    <?php endforeach; ?>
-<?php else : ?>
-    <div>Aucun Pokémon à afficher</div>
-<?php endif; ?>
-<hr />
-<?php
-    echo $this->paginationControl(
-      $this->pokemons,
-      'Sliding',
-      'partial/pagination',
-      ['route' => 'pokemon_home/paged']
+
+  <?php
+  echo $this->paginationControl(
+    $this->pokemons,
+    'Sliding',
+    'partial/pagination',
+    ['route' => 'pokemon_home/paged']
     );
-?>
+    ?>
+    <table class="table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>ID National</td>
+          <td>Nom</td>
+          <td>Description</td>
+          <td>Types</td>
+          <td>Evolutions</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->pokemons as $pokemon) : ?>
+          <tr>
+            <td><img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png" style="width: 40px;height: 40px;" /></td>
+            <td><?php echo $this->escapeHtml($pokemon->getNationalId()); ?></td>
+            <td><?php echo $this->escapeHtml($pokemon->getName()); ?></td>
+            <td><?php echo $this->escapeHtml($pokemon->getDescription()); ?></td>
+            <td><?php echo !empty($pokemonTypes[$pokemon->getId()]) ? join(', ', $pokemonTypes[$pokemon->getId()]) : "Aucun"; ?></td>
+            <td>
+              <?php
+              if(!empty($pokemonEvolutions[$pokemon->getId()])){
+                $i = 0;
+                $len = count($pokemonEvolutions[$pokemon->getId()]) - 1;
+                foreach($pokemonEvolutions[$pokemon->getId()] as $evolution){
+                  echo '<a href="' . $this->url('pokemon_show', ['pokemonName' => $evolution]) . '">' . $evolution . '</a>';
+                  if($i != $len){
+                    echo ", ";
+                  }
+                  $i++;
+                }
+              }
+              else{
+                echo "Aucun";
+              }
+              ?>
+            </td>
+            <td>
+              <a class="btn btn-primary" href="<?php echo $this->url('pokemon_show', ['pokemonName' => $pokemon->getName()]) ;?>">
+                <i class="glyphicon glyphicon-eye-open"></i> Afficher
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
+                <i class="glyphicon glyphicon-pencil"></i> Modifier
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
+                <i class="glyphicon glyphicon-remove"></i> Supprimer
+              </a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  <?php else : ?>
+    <div>Aucun Pokémon à afficher</div>
+  <?php endif; ?>
+
+  <p>
+    <a class="btn btn-success" href="<?php echo $this->url('pokemon_add') ;?>">
+      <i class="glyphicon glyphicon-plus"></i> Ajouter un Pokémon
+    </a>
+  </p>
