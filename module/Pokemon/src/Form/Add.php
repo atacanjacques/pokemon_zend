@@ -11,9 +11,10 @@ use Type\Entity\Type;
 class Add extends Form
 {
 
-  public function __construct($allTypes)
+  public function __construct($allTypes, $allPokemons)
   {
     $this->allTypes = $allTypes;
+    $this->allPokemons = $allPokemons;
 
     parent::__construct('add');
 
@@ -43,13 +44,15 @@ class Add extends Form
     $type1->setAttribute('class', 'form-control');
     $type1->setValueOptions($allTypes);
 
-    $type2 = new Element\Number('type2');
-    $type2->setLabel('ID Type 2');
+    $type2 = new Element\Select('type2');
+    $type2->setLabel('Type 2');
     $type2->setAttribute('class', 'form-control');
+    $type2->setValueOptions($allTypes);
 
-    $previous_pokemon = new Element\Number('previous_pokemon');
-    $previous_pokemon->setLabel('ID Evolution precedente');
+    $previous_pokemon = new Element\Select('previous_pokemon');
+    $previous_pokemon->setLabel('Évolution précedente');
     $previous_pokemon->setAttribute('class', 'form-control');
+    $previous_pokemon->setValueOptions($allPokemons);
 
     $this->add($national_id);
     $this->add($name);

@@ -27,6 +27,9 @@ class PokemonRepositoryImpl implements PokemonRepository
           'national_id' => $pokemon->getNationalId(),
           'name'  => $pokemon->getName(),
           'description' => $pokemon->getDescription(),
+          'type1' => $pokemon->getType1(),
+          'type2' => $pokemon->getType2(),
+          'previous_pokemon' => $pokemon->getPreviousPokemon()
         ])
         ->into('pokemon');
      $statement = $sql->prepareStatementForSqlObject($insert);
@@ -48,15 +51,13 @@ class PokemonRepositoryImpl implements PokemonRepository
           'id',
           'national_id',
           'name',
-          'description'
+          'description',
+          'type1',
+          'type2',
+          'previous_pokemon'
       ])->from([
         'p' => 'pokemon'
       ]);
-      // ->join(
-      //     ['c' => 'category'], // table name
-      //     'c.id = p.category_id',
-      //     ['category_id' => 'id', 'name', 'category_slug' => 'slug'] // column alias
-      // );
 
       $statement = $sql->prepareStatementForSqlObject($select);
       $result = $statement->execute();
@@ -85,15 +86,13 @@ class PokemonRepositoryImpl implements PokemonRepository
           'id',
           'national_id',
           'name',
-          'description'
+          'description',
+          'type1',
+          'type2',
+          'previous_pokemon'
       ])->from([
         'p' => 'pokemon'
       ]);
-      /*->join(
-          ['c' => 'category'], // table name
-          'c.id = p.category_id',
-          ['category_id' => 'id', 'name', 'category_slug' => 'slug'] // column alias
-      );*/
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
@@ -120,17 +119,14 @@ class PokemonRepositoryImpl implements PokemonRepository
           'id',
           'national_id',
           'name',
-          'description'
+          'description',
+          'type1',
+          'type2',
+          'previous_pokemon'
       ])->from([
         'p' => 'pokemon'
       ])
-// ->join(
-//         ['c' => 'category'], // TABLE NAME
-//         'c.id = p.category_id', // JOIN CONDITION
-//         ['category_id' => 'id', 'name', 'category_slug' => 'slug']
-//       )
-->where(
-//         [ 'c.slug' => $categorySlug, 'p.slug' => $pokemonSlug]
+    ->where(
         ['p.name' => $pokemonName]
       );
 
@@ -155,16 +151,14 @@ class PokemonRepositoryImpl implements PokemonRepository
           'id',
           'national_id',
           'name',
-          'description'
+          'description',
+          'type1',
+          'type2',
+          'previous_pokemon'
       ])->from([
         'p' => 'pokemon'
       ])
-/*->join(
-      ['c' => 'category'], // TABLE NAME
-      'c.id = p.category_id', // JOIN CONDITION
-      ['category_id' => 'id', 'name', 'category_slug' => 'slug']
-    )*/
-->where(
+    ->where(
       [ 'p.id' => $pokemonId ]
     );
 
@@ -188,7 +182,10 @@ class PokemonRepositoryImpl implements PokemonRepository
       ->set([
         'national_id'       => $pokemon->getNationalId(),
         'name'        => $pokemon->getName(),
-        'description'     => $pokemon->getDescription()
+        'description'     => $pokemon->getDescription(),
+          'type1' => $pokemon->getType1(),
+          'type2' => $pokemon->getType2(),
+          'previous_pokemon' => $pokemon->getPreviousPokemon(),
       ])->where([
         'id' => $pokemon->getId()
       ]);

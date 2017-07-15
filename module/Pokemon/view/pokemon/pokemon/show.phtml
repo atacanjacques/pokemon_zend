@@ -2,6 +2,10 @@
 $pokemon = $this->pokemon;
 ?>
 <h1><?php echo $this->escapeHtml($pokemon->getName()); ?></h1>
+<p>Type 1 : <?php echo $pokemon->getType1(); ?></p>
+<p>Type 1 : <?php echo $pokemon->getType2(); ?></p>
+<p>Evolution precedente : <?php echo $pokemon->getPreviousPokemon(); ?></p>
+
 <a class="btn btn-primary" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]); ?>">
   <i class="glyphicon glyphicon-pencil"></i> Modifier
 </a>

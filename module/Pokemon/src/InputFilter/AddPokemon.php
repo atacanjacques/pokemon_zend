@@ -30,21 +30,6 @@ class AddPokemon extends InputFilter
       $description->setFilterChain($this->getStringTrimFilterChain());
       $description->setValidatorChain($this->getDescriptionValidatorChain());
 
-      $type1 = new Input('type1');
-      $type1->setRequired(true);
-      $type1->setFilterChain($this->getStringTrimFilterChain());
-      $type1->setValidatorChain($this->getType1ValidatorChain());
-
-      $type2 = new Input('type2');
-      $type2->setRequired(true);
-      $type2->setFilterChain($this->getStringTrimFilterChain());
-      $type2->setValidatorChain($this->getType2ValidatorChain());
-
-      $previous_pokemon = new Input('previous_pokemon');
-      $previous_pokemon->setRequired(true);
-      $previous_pokemon->setFilterChain($this->getStringTrimFilterChain());
-      $previous_pokemon->setValidatorChain($this->gePreviousPokemonValidatorChain());
-
       $this->add($national_id);
       $this->add($name);
       $this->add($description);
@@ -80,33 +65,6 @@ class AddPokemon extends InputFilter
     $validatorChain->attach($stringLength);
 
     return $validatorChain;
-  }
-
-  protected function getType1ValidatorChain()
-  {
-      $validatorChain = new ValidatorChain();
-      $validatorChain->attach(new Digits(true));
-      $validatorChain->attach(new GreaterThan(['min' => 0, 'inclusive' => true]));
-      $validatorChain->attach(new LessThan(['max' => 999, 'inclusive' => true]));
-      return $validatorChain;
-  }
-
-  protected function getType2ValidatorChain()
-  {
-      $validatorChain = new ValidatorChain();
-      $validatorChain->attach(new Digits(true));
-      $validatorChain->attach(new GreaterThan(['min' => 0, 'inclusive' => true]));
-      $validatorChain->attach(new LessThan(['max' => 999, 'inclusive' => true]));
-      return $validatorChain;
-  }
-
-  protected function gePreviousPokemonValidatorChain()
-  {
-      $validatorChain = new ValidatorChain();
-      $validatorChain->attach(new Digits(true));
-      $validatorChain->attach(new GreaterThan(['min' => 0, 'inclusive' => true]));
-      $validatorChain->attach(new LessThan(['max' => 999, 'inclusive' => true]));
-      return $validatorChain;
   }
 
   protected function getStringTrimFilterChain()

@@ -38,12 +38,18 @@ class PokemonController extends AbstractActionController
   {
 
     $types = $this->typeService->fetchAll();
-    $allTypes = [];
+    $allTypes = [0 => "Aucun"];
     foreach($types as $type){
       $allTypes[$type->getId()] = $type->getName();
     }
 
-    $form = new Add($allTypes);
+    $pokemons = $this->pokemonService->fetchAll();
+    $allPokemons = [0 => "Aucun"];
+    foreach($pokemons as $pokemon){
+      $allPokemons[$pokemon->getId()] = $pokemon->getName();
+    }
+
+    $form = new Add($allTypes, $allPokemons);
 
     $variables = [
       'form' => $form
@@ -89,7 +95,20 @@ class PokemonController extends AbstractActionController
 
   public function editAction()
   {
-    $form = new Edit();
+    $types = $this->typeService->fetchAll();
+    $allTypes = [0 => "Aucun"];
+    foreach($types as $type){
+      $allTypes[$type->getId()] = $type->getName();
+    }
+
+    $pokemons = $this->pokemonService->fetchAll();
+    $allPokemons = [0 => "Aucun"];
+    foreach($pokemons as $pokemon){
+      $allPokemons[$pokemon->getId()] = $pokemon->getName();
+    }
+
+    $form = new Edit($allTypes, $allPokemons);
+
     $variables = ['form' => $form];
 
     if ($this->request->isPost()) {

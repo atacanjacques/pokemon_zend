@@ -6,11 +6,16 @@ use Zend\Form\Form;
 use Zend\Form\Element;
 use Pokemon\Entity\Hydrator\PokemonHydrator;
 use Zend\Hydrator\Aggregate\AggregateHydrator;
+use Type\Entity\Type;
 
 class Edit extends Form
 {
-  public function __construct()
+  public function __construct($allTypes, $allPokemons)
   {
+
+    $this->allTypes = $allTypes;
+    $this->allPokemons = $allPokemons;
+
     parent::__construct('edit');
 
     $hydrator = new AggregateHydrator();
@@ -36,17 +41,20 @@ class Edit extends Form
     $submit->setValue('Modifier le Pokémon !');
     $submit->setAttribute('class', 'btn btn-primary');
 
-    $type1 = new Element\Number('type1');
-    $type1->setLabel('ID Type 1');
+    $type1 = new Element\Select('type1');
+    $type1->setLabel('Type 1');
     $type1->setAttribute('class', 'form-control');
+    $type1->setValueOptions($allTypes);
 
-    $type2 = new Element\Number('type2');
-    $type2->setLabel('ID Type 2');
+    $type2 = new Element\Select('type2');
+    $type2->setLabel('Type 2');
     $type2->setAttribute('class', 'form-control');
+    $type2->setValueOptions($allTypes);
 
-    $previous_pokemon = new Element\Number('previous_pokemon');
-    $previous_pokemon->setLabel('ID Evolution precedente');
+    $previous_pokemon = new Element\Select('previous_pokemon');
+    $previous_pokemon->setLabel('Évolution précedente');
     $previous_pokemon->setAttribute('class', 'form-control');
+    $previous_pokemon->setValueOptions($allPokemons);
 
     $this->add($id);
     $this->add($national_id);
