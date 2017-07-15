@@ -1,0 +1,31 @@
+<h3>Location</h3>
+<a class="btn btn-primary" href="<?php echo $this->url("location_add"); ?>">Ajouter un Location !</a>
+
+<?php if (!empty($this->locations)) : ?>
+    <?php foreach ($this->locations as $location) : ?>
+        <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <strong>
+                    <a href="<?php echo $this->url(
+                      'location_show', [
+                        'locationId' => $location->getId()
+                      ]); ?>">
+                      <?php echo $this->escapeHtml($location->getId()); ?>
+                    </a>
+                </strong>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else : ?>
+    <div>Aucun Location à afficher</div>
+<?php endif; ?>
+<hr />
+<?php
+    echo $this->paginationControl(
+      $this->locations,
+      'Sliding',
+      'partial/pagination',
+      ['route' => 'location_home/paged']
+    );
+?>

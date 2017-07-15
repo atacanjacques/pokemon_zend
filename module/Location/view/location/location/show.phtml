@@ -1,0 +1,10 @@
+<?php
+$location = $this->location;
+?>
+<h1><?php echo $this->escapeHtml($location->getId()); ?></h1>
+<a class="btn btn-primary" href="<?php echo $this->url('location_edit', ['locationId' => $location->getId()]); ?>">
+  <i class="glyphicon glyphicon-pencil"></i> Modifier
+</a>
+<a class="btn btn-danger" href="<?php echo $this->url('location_delete', ['locationId' => $location->getId()]) ;?>">
+  <i class="glyphicon glyphicon-remove"></i> supprimer
+</a>

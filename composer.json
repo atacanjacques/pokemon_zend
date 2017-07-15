@@ -36,7 +36,9 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Pokemon\\": "module/Pokemon/src/"
+            "Pokemon\\": "module/Pokemon/src/",
+            "Type\\": "module/Type/src/",
+            "Location\\": "module/Location/src/"
         }
     },
     "autoload-dev": {

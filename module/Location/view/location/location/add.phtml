@@ -1,0 +1,25 @@
+<h3>Ajout d'un Location</h3>
+
+<?php
+  $form = $this->form;
+  $form->prepare();
+  echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('pokemon')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('long')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('lat')); ?>
+</div>
+
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>
+
+
+
+<?php
+echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])));
+?>

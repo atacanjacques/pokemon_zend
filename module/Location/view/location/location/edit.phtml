@@ -1,0 +1,20 @@
+<?php
+$form = $this->form;
+$form->prepare();
+?>
+<h1>Moodification d'un Location</h1>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<div class="form-group">
+  <?php echo $this->formRow($form->get('pokemon')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('long')); ?>
+</div>
+<div class="form-group">
+  <?php echo $this->formRow($form->get('lat')); ?>
+</div>
+<?php echo $this->formRow($form->get('id')); ?>
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>

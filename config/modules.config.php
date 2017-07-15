@@ -31,4 +31,5 @@ return [
     'Application',
     'Pokemon',
     'Type',
+    'Location',
 ];
