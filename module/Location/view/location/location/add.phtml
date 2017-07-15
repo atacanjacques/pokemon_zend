@@ -18,8 +18,30 @@
 <?php echo $this->formSubmit($form->get('submit')); ?>
 <?php echo $this->form()->closeTag(); ?>
 
+<br>
 
+<button type="button" id="findLocation" class="btn btn-success">Rafraichir ma position</button>
 
-<?php
-echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])));
-?>
+<script>
+	var url = "https://www.googleapis.com/geolocation/v1/geolocate?key=";
+	var key = "AIzaSyCbPa7paIr3MGlLVMMm6L6bFuvcDhECpP8";
+
+	function findLocation(){
+		$.ajax({
+			type : 'POST',
+			url: url + key, 
+			success: function(result){
+				$('input[name=lat]').val(result['location']['lat']);
+				$('input[name=long]').val(result['location']['lng']);
+			}});
+	}
+
+	$(document).ready(function() {
+		findLocation();
+
+		$("#findLocation").click(function() {
+			findLocation();
+		});
+	});
+
+</script>
