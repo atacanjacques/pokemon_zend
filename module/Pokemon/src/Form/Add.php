@@ -6,11 +6,15 @@ use Zend\Form\Form;
 use Zend\Form\Element;
 use Pokemon\Entity\Hydrator\PokemonHydrator;
 use Zend\Hydrator\Aggregate\AggregateHydrator;
+use Type\Entity\Type;
 
 class Add extends Form
 {
-  public function __construct()
+
+  public function __construct($allTypes)
   {
+    $this->allTypes = $allTypes;
+
     parent::__construct('add');
 
     $hydrator = new AggregateHydrator();
@@ -19,7 +23,7 @@ class Add extends Form
     $this->setHydrator($hydrator);
 
     $national_id = new Element\Number('national_id');
-    $national_id->setLabel('Id National');
+    $national_id->setLabel('ID National');
     $national_id->setAttribute('class', 'form-control');
 
     $name = new Element\Text('name');
@@ -37,16 +41,7 @@ class Add extends Form
     $type1 = new Element\Select('type1');
     $type1->setLabel('Type 1');
     $type1->setAttribute('class', 'form-control');
-    $type1->setValueOptions([
-     1 => 'Acier',
-     2 => 'Combat',
-     3 => 'Dragon',
-     4 => 'Eau'
-     ]);
-
-    // $type1 = new Element\Number('type1');
-    // $type1->setLabel('ID Type 1');
-    // $type1->setAttribute('class', 'form-control');
+    $type1->setValueOptions($allTypes);
 
     $type2 = new Element\Number('type2');
     $type2->setLabel('ID Type 2');

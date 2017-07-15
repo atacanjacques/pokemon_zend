@@ -13,10 +13,12 @@ use Pokemon\Entity\Pokemon;
 class PokemonController extends AbstractActionController
 {
   protected $pokemonService;
+  protected $typeService;
 
-  public function __construct($pokemonService)
+  public function __construct($pokemonService, $typeService)
   {
     $this->pokemonService = $pokemonService;
+    $this->typeService = $typeService;
   }
 
   public function indexAction()
@@ -34,7 +36,14 @@ class PokemonController extends AbstractActionController
 
   public function addAction()
   {
-    $form = new Add();
+
+    $types = $this->typeService->fetchAll();
+    $allTypes = [];
+    foreach($types as $type){
+      $allTypes[$type->getId()] = $type->getName();
+    }
+
+    $form = new Add($allTypes);
 
     $variables = [
       'form' => $form
