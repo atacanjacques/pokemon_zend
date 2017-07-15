@@ -44,9 +44,9 @@ class Add extends Form
      4 => 'Eau'
      ]);
 
-    $type1 = new Element\Number('type1');
-    $type1->setLabel('ID Type 1');
-    $type1->setAttribute('class', 'form-control');
+    // $type1 = new Element\Number('type1');
+    // $type1->setLabel('ID Type 1');
+    // $type1->setAttribute('class', 'form-control');
 
     $type2 = new Element\Number('type2');
     $type2->setLabel('ID Type 2');
