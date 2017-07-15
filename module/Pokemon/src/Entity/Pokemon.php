@@ -12,6 +12,12 @@ class Pokemon
 
     protected $description;
 
+    protected $type1;
+
+    protected $type2;
+
+    protected $previous_pokemon;
+
     public function setId($id)
     {
       $this->id = $id;
@@ -50,5 +56,35 @@ class Pokemon
     public function setDescription($description)
     {
       $this->description = $description;
+    }
+    
+    public function getType1()
+    {
+      return $this->type1;
+    }
+
+    public function setType1($type1)
+    {
+      $this->type1 = $type1;
+    }
+    
+    public function getType2()
+    {
+      return $this->type2;
+    }
+
+    public function setType2($type2)
+    {
+      $this->type2 = $type2;
+    }
+
+    public function getPreviousPokemon()
+    {
+      return $this->previous_pokemon;
+    }
+
+    public function setPreviousPokemon($previous_pokemon)
+    {
+      $this->previous_pokemon = $previous_pokemon;
     }
 }

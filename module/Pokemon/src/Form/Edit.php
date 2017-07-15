@@ -36,10 +36,25 @@ class Edit extends Form
     $submit->setValue('Modifier le Pokémon !');
     $submit->setAttribute('class', 'btn btn-primary');
 
+    $type1 = new Element\Number('type1');
+    $type1->setLabel('ID Type 1');
+    $type1->setAttribute('class', 'form-control');
+
+    $type2 = new Element\Number('type2');
+    $type2->setLabel('ID Type 2');
+    $type2->setAttribute('class', 'form-control');
+
+    $previous_pokemon = new Element\Number('previous_pokemon');
+    $previous_pokemon->setLabel('ID Evolution precedente');
+    $previous_pokemon->setAttribute('class', 'form-control');
+
     $this->add($id);
     $this->add($national_id);
     $this->add($name);
     $this->add($description);
+    $this->add($type1);
+    $this->add($type2);
+    $this->add($previous_pokemon);
     $this->add($submit);
-  }
+}
 }

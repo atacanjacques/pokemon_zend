@@ -34,9 +34,34 @@ class Add extends Form
     $submit->setValue('Ajouter le Pokémon !');
     $submit->setAttribute('class', 'btn btn-primary');
 
+    $type1 = new Element\Select('type1');
+    $type1->setLabel('Type 1');
+    $type1->setAttribute('class', 'form-control');
+    $type1->setValueOptions([
+     1 => 'Acier',
+     2 => 'Combat',
+     3 => 'Dragon',
+     4 => 'Eau'
+     ]);
+
+    $type1 = new Element\Number('type1');
+    $type1->setLabel('ID Type 1');
+    $type1->setAttribute('class', 'form-control');
+
+    $type2 = new Element\Number('type2');
+    $type2->setLabel('ID Type 2');
+    $type2->setAttribute('class', 'form-control');
+
+    $previous_pokemon = new Element\Number('previous_pokemon');
+    $previous_pokemon->setLabel('ID Evolution precedente');
+    $previous_pokemon->setAttribute('class', 'form-control');
+
     $this->add($national_id);
     $this->add($name);
     $this->add($description);
+    $this->add($type1);
+    $this->add($type2);
+    $this->add($previous_pokemon);
     $this->add($submit);
   }
 }
