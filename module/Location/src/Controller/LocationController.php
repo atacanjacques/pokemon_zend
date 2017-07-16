@@ -47,6 +47,11 @@ class LocationController extends AbstractActionController
 
   public function addAction()
   {
+    if(!$this->identity()){
+      $this->layout('layout/layout_public');
+
+    }
+
     $pokemons = $this->pokemonService->fetchAll();
     $allPokemons = [0 => "Aucun"];
     foreach($pokemons as $pokemon){
@@ -56,7 +61,8 @@ class LocationController extends AbstractActionController
     $form = new Add($allPokemons);
 
     $variables = [
-    'form' => $form
+    'form' => $form,
+    'pokemons' => $pokemons
     ];
 
     if ($this->request->isPost()) {
@@ -75,7 +81,15 @@ class LocationController extends AbstractActionController
       }
     }
 
-    return new ViewModel($variables);
+
+    if(!$this->identity()){
+      $viewModel = new ViewModel($variables);
+      $viewModel->setTemplate('location/add_public');
+      return $viewModel;
+    }
+    else{
+      return new ViewModel($variables);
+    }
   }
 
   public function showAction()

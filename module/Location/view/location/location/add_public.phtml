@@ -1,0 +1,152 @@
+<?php
+$form = $this->form;
+$form->prepare();
+?>
+<h1>Ajout d'une localisation</h1>
+
+<div class="row">
+	<div class="col l3 m4">
+		<?php
+		echo $this->form()->openTag($form);
+		?>
+		<div class="row">
+			<div class="input-field col s12">
+				<select class="icons" name="pokemon">
+					<?php
+					foreach($form->get('pokemon')->getValueOptions() as $selectPokemonId => $selectPokemon){
+						if($selectPokemonId == 0){
+							continue;
+						}
+						foreach($pokemons as $pokemon){
+							if($pokemon->getId() == $selectPokemonId){
+								$national_id = $pokemon->getNationalId();
+							}
+						}
+						echo '<option value="' . $selectPokemonId . '" data-icon="http://assets.pokemon.com/assets/cms2/img/pokedex/full/' . $national_id . '.png" class="left circle">' . $selectPokemon . '</option>';
+					}
+					?>
+				</select>
+				<label><?php echo $form->get('pokemon')->getLabel(); ?></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<input id="lat" type="text" name="lat" value=" ">
+				<label for="lat"><?php echo $form->get('lat')->getLabel(); ?></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<input id="long" type="text" name="long" value=" ">
+				<label for="long"><?php echo $form->get('long')->getLabel(); ?></label>
+			</div>
+		</div>
+
+		<div class="row">
+			<p>
+				<button type="button" id="findLocation" class="waves-effect waves-light btn-large green">Rafraichir ma position</button>
+			</p>
+		</div>
+
+		<div class="row">
+			<p>
+				<button type="submit" class="waves-effect waves-light btn-large light-blue darken-4" name="submit"><?php echo $form->get('submit')->getValue(); ?></button>
+			</p>
+		</div>
+
+
+		<?php echo $this->form()->closeTag(); ?>
+
+	</div>
+
+	<div class="col l9 m8">
+		<div id="map"></div>
+	</div>
+
+</div>
+
+<script>
+
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+
+	var url = "https://www.googleapis.com/geolocation/v1/geolocate?key=";
+	var key = "AIzaSyCbPa7paIr3MGlLVMMm6L6bFuvcDhECpP8";
+
+	function findLocation(){
+		$.ajax({
+			type : 'POST',
+			url: url + key, 
+			success: function(result){
+				$('input[name=lat]').val(result['location']['lat']);
+				$('input[name=long]').val(result['location']['lng']);
+				initMap();
+			}});
+	}
+
+	$(document).ready(function() {
+		findLocation();
+
+		$("#findLocation").click(function() {
+			findLocation();
+		});
+
+		$("select[name=pokemon]").change(function() {
+			initMap();
+		});
+
+		$("input[name=lat], input[name=lat]").keyup(function() {
+			initMap();
+		});
+	});
+
+</script>
+
+<script>
+
+	$(document).ready(function(){
+		var cardHeight = $(".col.l3.m4").height();
+		$("#map").height(cardHeight);
+		initMap();
+	});
+
+
+	function initMap() {
+
+		var lat = parseFloat($("input[name=lat]").val());
+		var long = parseFloat($("input[name=long]").val());
+		var national_id = $("select[name=pokemon] :selected").data("icon").substr(-7,3);
+		var img_url = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + national_id + ".png";
+
+		var locations = [
+		{lat: lat, lng: long}]
+
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 12,
+			center: {lat: lat, lng: long}
+		});
+
+		var markers = locations.map(function(location) {
+			var icon = {
+				url: img_url,
+				scaledSize: new google.maps.Size(60, 60)
+			};
+
+			return new google.maps.Marker({
+				position: location,
+				icon: icon
+			});
+		});
+
+		var markerCluster = new MarkerClusterer(map, markers,
+			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+	}
+
+</script>
+
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6nU3cFXFj81IyqKXDGTsKlJwja4yMiQs&callback=initMap">
+</script>
