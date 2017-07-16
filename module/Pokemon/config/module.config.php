@@ -11,7 +11,7 @@ return [
       'pokemon_home' => [
         'type' => 'Literal',
         'options' => [
-          'route' => '/pokedex/pokemon',
+          'route' => '/',
           'defaults' => [
             'controller'  => 'Pokemon\Controller\Pokemon',
             'action'      => 'index'

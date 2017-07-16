@@ -29,26 +29,32 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Pokedex Zend</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
+        <a class="navbar-brand" href="<?= $this->url('pokemon_home') ?>">
+                <img src="<?= $this->basePath('img/zf-logo-mark.svg') ?>" height="28" alt="Pokedex Zend <?= \Application\Module::VERSION ?>"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="<?= $this->url('home') ?>">Home</a></li>
-            <li><a href="<?= $this->url('pokemon_home') ?>">Pokémon</a></li>
-            <li><a href="<?= $this->url('type_home') ?>">Type</a></li>
-            <li><a href="<?= $this->url('location_home') ?>">Location</a></li>
+            <li><a href="<?= $this->url('pokemon_home') ?>">Accueil</a></li>
+            <?php
+            if($this->identity()){
+                ?>
+                <li><a href="<?= $this->url('type_home') ?>">Type</a></li>
+                <li><a href="<?= $this->url('location_home') ?>">Localisation</a></li>
+                <?php
+            }
+            ?>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
             <?php
-            if($this->identity()){
+            if(!$this->identity()){
                 ?>
-                <li><a href="<?= $this->url('user_logout') ?>"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
+                <li><a href="<?= $this->url('user_login') ?>"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
                 <?php
             }
             else{
                 ?>
-                <li><a href="<?= $this->url('user_login') ?>"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                <li><a href="<?= $this->url('user_logout') ?>"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
                 <?php
             }
             ?>

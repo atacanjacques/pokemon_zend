@@ -47,21 +47,21 @@ class PokemonController extends AbstractActionController
     }
 
 
-$pokemonsIds = [];
-foreach ($pokemons as $pokemon) {
-array_push($pokemonsIds, $pokemon->getId());
-}
-
-$pokemonEvolutions = [];
-foreach ($pokemonsIds as $pokemonsId) {
-    $pokemonEvolution = [];
-    foreach($pokemons as $pokemon){
-      if($pokemon->getPreviousPokemon() == $pokemonsId){
-        array_push($pokemonEvolution, $pokemon->getName());
-      }
+    $pokemonsIds = [];
+    foreach ($pokemons as $pokemon) {
+      array_push($pokemonsIds, $pokemon->getId());
     }
+
+    $pokemonEvolutions = [];
+    foreach ($pokemonsIds as $pokemonsId) {
+      $pokemonEvolution = [];
+      foreach($pokemons as $pokemon){
+        if($pokemon->getPreviousPokemon() == $pokemonsId){
+          array_push($pokemonEvolution, $pokemon->getName());
+        }
+      }
       $pokemonEvolutions[$pokemonsId] = $pokemonEvolution;
-  }
+    }
 
     $variables = [
     'pokemonTypes' => $pokemonTypes,
@@ -74,6 +74,10 @@ foreach ($pokemonsIds as $pokemonsId) {
 
   public function addAction()
   {
+
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
 
     $types = $this->typeService->fetchAll();
     $allTypes = [0 => "Aucun"];
@@ -161,12 +165,20 @@ foreach ($pokemonsIds as $pokemonsId) {
 
   public function deleteAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $this->pokemonService->delete($this->params()->fromRoute('pokemonId'));
     $this->redirect()->toRoute('pokemon_home');
   }
 
   public function editAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $types = $this->typeService->fetchAll();
     $allTypes = [0 => "Aucun"];
     foreach($types as $type){

@@ -47,21 +47,28 @@
               }
               ?>
             </td>
+
             <td>
               <a class="btn btn-primary" href="<?php echo $this->url('pokemon_show', ['pokemonName' => $pokemon->getName()]) ;?>">
                 <i class="glyphicon glyphicon-eye-open"></i> Afficher
               </a>
             </td>
-            <td>
-              <a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
-                <i class="glyphicon glyphicon-pencil"></i> Modifier
-              </a>
-            </td>
-            <td>
-              <a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
-                <i class="glyphicon glyphicon-remove"></i> Supprimer
-              </a>
-            </td>
+            <?php
+            if($this->identity()){
+              ?>
+              <td>
+                <a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
+                  <i class="glyphicon glyphicon-pencil"></i> Modifier
+                </a>
+              </td>
+              <td>
+                <a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
+                  <i class="glyphicon glyphicon-remove"></i> Supprimer
+                </a>
+              </td>
+              <?php
+            }
+            ?>
           </tr>
         <?php endforeach; ?>
       </tbody>
@@ -69,9 +76,19 @@
   <?php else : ?>
     <div>Aucun Pokémon à afficher</div>
   <?php endif; ?>
-
+  <?php
+  if($this->identity()){
+    ?>
+    <p>
+      <a class="btn btn-success" href="<?php echo $this->url('pokemon_add') ;?>">
+        <i class="glyphicon glyphicon-plus"></i> Ajouter un Pokémon
+      </a>
+    </p>
+    <?php
+  }
+  ?>
   <p>
-    <a class="btn btn-success" href="<?php echo $this->url('pokemon_add') ;?>">
-      <i class="glyphicon glyphicon-plus"></i> Ajouter un Pokémon
+    <a class="btn btn-primary" href="<?php echo $this->url('location_add') ;?>">
+      <i class="glyphicon glyphicon-plus"></i> Ajouter une localisation
     </a>
   </p>

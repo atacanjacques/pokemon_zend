@@ -21,39 +21,47 @@ class TypeController extends AbstractActionController
 
   public function indexAction()
   {
-      $types = $this->typeService->fetch(
-          $this->params()->fromRoute('page')
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
+    $types = $this->typeService->fetch(
+      $this->params()->fromRoute('page')
       );
 
-      $variables = [
-        'types' => $types
-      ];
+    $variables = [
+    'types' => $types
+    ];
 
-      return new ViewModel($variables);
+    return new ViewModel($variables);
   }
 
   public function addAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $form = new Add();
 
     $variables = [
-      'form' => $form
+    'form' => $form
     ];
 
     if ($this->request->isPost()) {
-        $typePost = new Type();
-        $form->bind($typePost);
+      $typePost = new Type();
+      $form->bind($typePost);
 
-        $form->setInputFilter(new AddType());
+      $form->setInputFilter(new AddType());
 
-        $data = $this->request->getPost();
-        $form->setData($data);
+      $data = $this->request->getPost();
+      $form->setData($data);
 
-        if ($form->isValid()) {
-          $this->typeService->save($typePost);
+      if ($form->isValid()) {
+        $this->typeService->save($typePost);
 
-          return $this->redirect()->toRoute('type_home');
-        }
+        return $this->redirect()->toRoute('type_home');
+      }
     }
 
     return new ViewModel($variables);
@@ -61,9 +69,13 @@ class TypeController extends AbstractActionController
 
   public function showAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $type = $this->typeService->find(
       $this->params()->fromRoute('typeName')
-    );
+      );
 
     if (is_null($type)) {
       $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -74,12 +86,20 @@ class TypeController extends AbstractActionController
 
   public function deleteAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $this->typeService->delete($this->params()->fromRoute('typeId'));
     $this->redirect()->toRoute('type_home');
   }
 
   public function editAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $form = new Edit();
     $variables = ['form' => $form];
 
@@ -96,18 +116,18 @@ class TypeController extends AbstractActionController
     }
     else
     {
-        $type = $this->typeService
-          ->findById(
-            $this->params()->fromRoute('typeId')
+      $type = $this->typeService
+      ->findById(
+        $this->params()->fromRoute('typeId')
         );
-        if (is_null($type)) {
-          $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-        } else {
-          $form->bind($type);
-          $form->get('name')->setValue($type->getName());
-          $form->get('id')->setValue($type->getId());
-        }
+      if (is_null($type)) {
+        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+      } else {
+        $form->bind($type);
+        $form->get('name')->setValue($type->getName());
+        $form->get('id')->setValue($type->getId());
       }
+    }
     return new ViewModel($variables);
   }
 }

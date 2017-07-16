@@ -23,6 +23,10 @@ class LocationController extends AbstractActionController
 
   public function indexAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $locations = $this->locationService->fetch(
       $this->params()->fromRoute('page')
       );
@@ -76,6 +80,10 @@ class LocationController extends AbstractActionController
 
   public function showAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $location = $this->locationService->find(
       $this->params()->fromRoute('locationId')
       );
@@ -100,12 +108,20 @@ class LocationController extends AbstractActionController
 
   public function deleteAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $this->locationService->delete($this->params()->fromRoute('locationId'));
     $this->redirect()->toRoute('location_home');
   }
 
   public function editAction()
   {
+    if(!$this->identity()){
+      return $this->redirect()->toRoute('pokemon_home');
+    }
+
     $pokemons = $this->pokemonService->fetchAll();
     $allPokemons = [0 => "Aucun"];
     foreach($pokemons as $pokemon){

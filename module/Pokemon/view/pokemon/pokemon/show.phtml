@@ -28,6 +28,9 @@ $pokemon = $this->pokemon;
 	?>
 </p>
 
+<?php
+if($this->identity()){
+?>
 <p>
 	<a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
 		<i class="glyphicon glyphicon-pencil"></i> Modifier
@@ -36,3 +39,6 @@ $pokemon = $this->pokemon;
 		<i class="glyphicon glyphicon-remove"></i> Supprimer
 	</a>
 </p>
+<?php
+}
+?>
