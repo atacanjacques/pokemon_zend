@@ -1,0 +1,21 @@
+<?php if ($this->pageCount) : ?>
+  <ul class="pagination center-align">
+    <?php if (isset($this->previous)): ?>
+      <li><a href="<?php echo $this->url($this->route, [ 'page' => $this->previous ]) ?>"><span><i class="material-icons">chevron_left</i></span></a><li>
+      <?php else: ?>
+          <li class="disabled"><a href="#"><span><i class="material-icons">chevron_left</i></span></a><li>
+          <?php endif; ?>
+          <?php foreach ($this->pagesInRange as $page):?>
+            <?php if ($page != $this->current): ?>
+                <li class="waves-effect"><a href="<?php echo $this->url($this->route, [ 'page' => $page ]) ?>"><?php echo $page; ?></a></li>
+            <?php else: ?>
+                <li class="active light-blue darken-4"><a href="<?php echo $this->url($this->route, [ 'page' => $page ]) ?>"><?php echo $page; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php if (isset($this->next)): ?>
+            <li><a href="<?php echo $this->url($this->route, [ 'page' => $this->next ]) ?>"><span><i class="material-icons">chevron_right</i></span></a></li>
+        <?php else: ?>
+            <li class="disabled"><a href="#"><span><i class="material-icons">chevron_right</i></span></a></li>
+        <?php endif; ?>
+    </ul>
+<?php endif; ?>

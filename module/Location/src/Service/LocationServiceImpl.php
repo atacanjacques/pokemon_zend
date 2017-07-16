@@ -11,7 +11,7 @@ class LocationServiceImpl implements LocationService
 
   public function getLocationRepository()
   {
-      return $this->locationRepository;
+    return $this->locationRepository;
   }
 
   public function setLocationRepository($locationRepository)
@@ -27,6 +27,11 @@ class LocationServiceImpl implements LocationService
   public function fetchAll()
   {
     return $this->locationRepository->fetchAll();
+  }
+
+  public function fetchAllRecentAndPokemonId($pokemonid)
+  {
+    return $this->locationRepository->fetchAllRecentAndPokemonId($pokemonid);
   }
 
   public function fetch($page)

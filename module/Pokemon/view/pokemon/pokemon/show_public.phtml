@@ -1,0 +1,142 @@
+<?php
+$pokemon = $this->pokemon;
+?>
+
+<?php
+if($this->identity()){
+	?>
+	<p>
+		<a class="btn btn-warning" href="<?php echo $this->url('pokemon_edit', ['pokemonId' => $pokemon->getId()]) ;?>">
+			<i class="glyphicon glyphicon-pencil"></i> Modifier
+		</a>
+		<a class="btn btn-danger" href="<?php echo $this->url('pokemon_delete', ['pokemonId' => $pokemon->getId()]) ;?>">
+			<i class="glyphicon glyphicon-remove"></i> Supprimer
+		</a>
+	</p>
+	<?php
+}
+?>
+
+
+
+
+<div class="valign-wrapper">
+	<div class="row container valign center-align col l12">
+		<p class="flow-text">Localisation de <b><?php echo $this->escapeHtml($pokemon->getName()); ?></b> depuis les 30 dernières minutes</p>
+	</div>
+</div>
+
+<div class="row">
+
+	<div class="col l3 m4"> 
+		<div class="card pokemon-card">
+			<div class="card-image">
+				<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png">
+				<span class="card-title">#<?php echo $this->escapeHtml($pokemon->getNationalId()); ?> <?php echo $this->escapeHtml($pokemon->getName()); ?></span>
+			</div>
+			<div class="card-content">
+				<?php
+				foreach ($pokemonTypes as $pokemonType) {
+					foreach ($types as $type) {
+						if($pokemonType == $type->getName()){
+							echo '<div class="chip" style="background-color:' . $type->getColor() . '">' . $type->getName() . '</div>';
+						}
+					}
+				}
+				?>
+
+				<p><br><?php echo $this->escapeHtml($pokemon->getDescription()); ?></p>
+				<p>
+					<br>
+					<b>Évolution direct : </b>
+					<?php
+					if(!empty($evolutions)){
+						$i = 0;
+						$len = count($evolutions) - 1;
+						foreach($evolutions as $evolution){
+							echo '<a href="' . $this->url('pokemon_show', ['pokemonName' => $evolution]) . '">' . $evolution . '</a>';
+							if($i != $len){
+								echo ", ";
+							}
+							$i++;
+						}
+					}
+					else{
+						echo "Aucun";
+					}
+					?>
+				</p>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col l9 m8"> 
+		<?php
+		if($locations){
+			?>
+			<div id="map"></div>
+			<?php
+		}
+		else{
+			?>
+			<div class="row center-align">
+				<p class="flow-text">Aucune localisation n'a été ajouter depuis les 30 dernières minutes pour <b><?php echo $this->escapeHtml($pokemon->getName()); ?></b>.</p>
+			</div>
+			<?php
+		}
+		?>
+	</div>
+
+</div>
+
+<?php
+if($locations){
+	?>
+	<div class="row">
+		<table class="striped">
+			<thead>
+				<tr>
+					<td>Date d'ajout</td><td>Latitude</td>
+					<td>Longitude</td>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($locations as $location) : ?>
+					<tr>
+						<?php $date = new DateTime($location->getCreatedAt()); ?>
+						<td>Vu à <b><?php echo $date->format('H:i'); ?></b> le <b><?php echo $date->format('d/m/Y'); ?></b></td>
+						<td><?php echo $this->escapeHtml($location->getLat()); ?></td>
+						<td><?php echo $this->escapeHtml($location->getLong()); ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			var cardHeight = $(".pokemon-card").height();
+			$("#map").height(cardHeight);
+			initMap();
+		});
+
+		function initMap(){
+			var uluru = {lat: -25.363, lng: 131.044};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 4,
+				center: uluru
+			});
+			var marker = new google.maps.Marker({
+				position: uluru,
+				map: map
+			});
+		}
+	</script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6nU3cFXFj81IyqKXDGTsKlJwja4yMiQs&callback=initMap">
+</script>
+
+<?php
+}
+?>

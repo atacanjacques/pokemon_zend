@@ -26,8 +26,7 @@ class LocationRepositoryImpl implements LocationRepository
         ->values([
         'pokemon'      => $location->getPokemon(),
         'lat'      => $location->getLat(),
-        'long'      => $location->getLong(),
-        'created_at'      => $location->getCreatedAt()
+        'long'      => $location->getLong()
         ])
         ->into('location');
      $statement = $sql->prepareStatementForSqlObject($insert);
@@ -54,6 +53,44 @@ class LocationRepositoryImpl implements LocationRepository
       ])->from([
         'l' => 'location'
       ]);
+
+      $statement = $sql->prepareStatementForSqlObject($select);
+      $result = $statement->execute();
+
+      $hydrator = new AggregateHydrator();
+      $hydrator->add(new LocationHydrator());
+      $resultSet = new HydratingResultSet($hydrator, new Location());
+      $resultSet->initialize($result);
+
+      $locations = [];
+      foreach($resultSet as $location) {
+          /**
+           * @var \Location\Entity\Location $location
+           */
+          $locations[] = $location;
+      }
+      return $locations;
+  }
+
+  public function fetchAllRecentAndPokemonId($pokemonId)
+  {
+      $sql = new \Zend\Db\Sql\Sql($this->adapter);
+      $select = $sql->select();
+      $select->columns([
+          'id',
+          'pokemon',
+          'lat',
+          'long',
+          'created_at'
+      ])->from([
+        'l' => 'location'
+      ])
+      ->where(
+        [
+        'l.pokemon' => $pokemonId, 
+        "l.created_at >= '2017-07-16 22:16:14'"
+        ]
+      );
 
       $statement = $sql->prepareStatementForSqlObject($select);
       $result = $statement->execute();

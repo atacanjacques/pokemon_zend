@@ -11,6 +11,8 @@ interface LocationRepository extends RepositoryInterface
 
   public function fetchAll();
 
+  public function fetchAllRecentAndPokemonId($pokemonid);
+
   public function fetch($page);
 
   public function find($locationName);

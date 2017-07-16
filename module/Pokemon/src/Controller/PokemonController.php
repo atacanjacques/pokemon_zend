@@ -14,15 +14,22 @@ class PokemonController extends AbstractActionController
 {
   protected $pokemonService;
   protected $typeService;
+  protected $locationService;
 
-  public function __construct($pokemonService, $typeService)
+  public function __construct($pokemonService, $typeService, $locationService)
   {
     $this->pokemonService = $pokemonService;
     $this->typeService = $typeService;
+    $this->locationService = $locationService;
   }
 
   public function indexAction()
   {
+    if(!$this->identity()){
+      $this->layout('layout/layout_public');
+
+    }
+
     $types = $this->typeService->fetchAll();
     $allTypes = [0 => "Aucun"];
     foreach($types as $type){
@@ -69,7 +76,15 @@ class PokemonController extends AbstractActionController
     'types' => $types,
     'pokemons' => $pokemons
     ];
-    return new ViewModel($variables);
+
+    if(!$this->identity()){
+      $viewModel = new ViewModel($variables);
+      $viewModel->setTemplate('pokemon/index_public');
+      return $viewModel;
+    }
+    else{
+      return new ViewModel($variables);
+    }
   }
 
   public function addAction()
@@ -119,6 +134,11 @@ class PokemonController extends AbstractActionController
   public function showAction()
   {
 
+    if(!$this->identity()){
+      $this->layout('layout/layout_public');
+
+    }
+
     $types = $this->typeService->fetchAll();
     $allTypes = [0 => "Aucun"];
     foreach($types as $type){
@@ -133,6 +153,10 @@ class PokemonController extends AbstractActionController
 
     $pokemon = $this->pokemonService->find(
       $this->params()->fromRoute('pokemonName')
+      );
+
+    $locations = $this->locationService->fetchAllRecentAndPokemonId(
+      $pokemon->getId()
       );
 
     if (is_null($pokemon)) {
@@ -155,12 +179,21 @@ class PokemonController extends AbstractActionController
 
     $variables = [
     'pokemonTypes' => $pokemonTypes,
+    'types' => $types,
     'evolutions' => $evolutions,
     'pokemon' => $pokemon,
-    'pokemons' => $pokemons
+    'pokemons' => $pokemons,
+    'locations' => $locations
     ];
 
-    return new ViewModel($variables);
+    if(!$this->identity()){
+      $viewModel = new ViewModel($variables);
+      $viewModel->setTemplate('pokemon/show_public');
+      return $viewModel;
+    }
+    else{
+      return new ViewModel($variables);
+    }
   }
 
   public function deleteAction()

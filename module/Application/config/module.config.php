@@ -42,10 +42,12 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout_public'           => __DIR__ . '/../view/layout/layout_public.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
             'partial/pagination'      => __DIR__ . '/../view/partial/pagination.phtml',
+            'partial/pagination_public'      => __DIR__ . '/../view/partial/pagination_public.phtml',
         ],
                 'template_path_stack' => [
             __DIR__ . '/../view',

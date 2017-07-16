@@ -10,9 +10,9 @@
     </li>
     <?php foreach ($this->pagesInRange as $page):?>
         <?php if ($page != $this->current): ?>
-            <li><a href="<?php echo $this->url($this->route, [ 'page' => $page ]) ?>" class="active"><?php echo $page; ?></a></li>
-        <?php else: ?>
             <li><a href="<?php echo $this->url($this->route, [ 'page' => $page ]) ?>"><?php echo $page; ?></a></li>
+        <?php else: ?>
+            <li class="active"><a href="<?php echo $this->url($this->route, [ 'page' => $page ]) ?>"><?php echo $page; ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
     <li>

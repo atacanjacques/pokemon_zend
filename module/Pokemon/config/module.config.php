@@ -22,7 +22,7 @@ return [
             'paged' => [
                 'type' => 'Segment',
                 'options' => [
-                    'route' => '/page/:page' ,
+                    'route' => 'pokedex/pokemon/page/:page' ,
                     'constraints' => [ 'page' => '[0-9]+' ],
                     'defaults' => [
                         'controller' => 'Pokemon\Controller\Pokemon',
@@ -94,6 +94,9 @@ return [
 
   // view manager
   'view_manager' => [
+          'template_map' => [
+            'pokemon/index_public'           => __DIR__ . '/../view/pokemon/pokemon/index_public.phtml'
+        ],
     'template_path_stack'   => [
       __DIR__ . '/../view'
     ]

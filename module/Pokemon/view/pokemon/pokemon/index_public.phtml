@@ -1,0 +1,61 @@
+  <div class="valign-wrapper">
+    <div class="row container valign center-align col l12">
+        <p class="flow-text">Choisissez le Pokémon que vous souhaitez chercher !</p>
+    </div>
+  </div>
+
+<?php if (!empty($this->pokemons)) : ?>
+
+  <?php
+  echo $this->paginationControl(
+    $this->pokemons,
+    'Sliding',
+    'partial/pagination_public',
+    ['route' => 'pokemon_home/paged']
+    );
+    ?>
+
+    <?php
+    if($this->identity()){
+      ?>
+      <p>
+        <a class="btn btn-success" href="<?php echo $this->url('pokemon_add') ;?>">
+          <i class="glyphicon glyphicon-plus"></i> Ajouter un Pokémon
+        </a>
+      </p>
+      <?php
+    }
+    ?>
+    <p>
+      <a class="waves-effect waves-light btn-large green" href="<?php echo $this->url('location_add') ;?>"><i class="material-icons left">add</i> Ajouter une localisation</a>
+    </p>
+
+    <div class="row">
+      <?php foreach ($this->pokemons as $pokemon) : ?>
+
+        <div class="col l3 m4"> 
+          <a href="<?php echo $this->url('pokemon_show', ['pokemonName' => $pokemon->getName()]) ;?>">
+            <div class="card">
+              <div class="card-image">
+                <img src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png">
+                <span class="card-title">#<?php echo $this->escapeHtml($pokemon->getNationalId()); ?> <?php echo $this->escapeHtml($pokemon->getName()); ?></span>
+              </div>
+              <div class="card-content">
+                <?php
+                foreach ($pokemonTypes[$pokemon->getId()] as $pokemonType) {
+                  foreach ($types as $type) {
+                    if($pokemonType == $type->getName()){
+                      echo '<div class="chip" style="background-color:' . $type->getColor() . '">' . $type->getName() . '</div>';
+                    }
+                  }
+                }
+                ?>
+              </div>
+            </div>
+          </a>
+        </div>
+      <?php endforeach; ?>
+    <?php else : ?>
+      <h2>Aucun Pokémon à afficher !</h2>
+    <?php endif; ?>
+  </div>
