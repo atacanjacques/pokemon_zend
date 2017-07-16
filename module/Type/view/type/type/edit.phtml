@@ -2,14 +2,35 @@
 $form = $this->form;
 $form->prepare();
 ?>
-<h1>Moodification d'un Type</h1>
-
-<?php echo $this->form()->openTag($form); ?>
-
-<div class="form-group">
-    <?php echo $this->formRow($form->get('name')); ?>
+<h1>Modification d'un Type</h1>
+<?php
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('name')); ?>
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('color1')); ?>
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('color2')); ?>
+		</p>
+	</div>
 </div>
 
+<p>
+	<?php echo $this->formSubmit($form->get('submit')); ?>
+
+</p>
 <?php echo $this->formRow($form->get('id')); ?>
-<?php echo $this->formSubmit($form->get('submit')); ?>
 <?php echo $this->form()->closeTag(); ?>

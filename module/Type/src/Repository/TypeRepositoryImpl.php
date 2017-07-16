@@ -24,7 +24,9 @@ class TypeRepositoryImpl implements TypeRepository
       $sql = new \Zend\Db\Sql\Sql($this->adapter);
       $insert = $sql->insert()
         ->values([
-          'name'  => $type->getName()
+          'name'  => $type->getName(),
+          'color1'  => $type->getColor1(),
+          'color2'  => $type->getColor2()
         ])
         ->into('type');
      $statement = $sql->prepareStatementForSqlObject($insert);
@@ -45,6 +47,8 @@ class TypeRepositoryImpl implements TypeRepository
       $select->columns([
           'id',
           'name',
+          'color1',
+          'color2'
       ])->from([
         't' => 'type'
       ]);
@@ -73,7 +77,9 @@ class TypeRepositoryImpl implements TypeRepository
       $select = $sql->select();
       $select->columns([
           'id',
-          'name'
+          'name',
+          'color1',
+          'color2'
       ])->from([
         't' => 'type'
       ]);
@@ -100,7 +106,9 @@ class TypeRepositoryImpl implements TypeRepository
       $select = $sql->select();
       $select->columns([
           'id',
-          'name'
+          'name',
+          'color1',
+          'color2'
       ])->from([
         't' => 'type'
       ])
@@ -127,6 +135,8 @@ class TypeRepositoryImpl implements TypeRepository
     $select->columns([
           'id',
           'name',
+          'color1',
+          'color2'
       ])->from([
         't' => 'type'
       ])
@@ -152,6 +162,8 @@ class TypeRepositoryImpl implements TypeRepository
     $update = $sql->update('type')
       ->set([
         'name'        => $type->getName(),
+          'color1'  => $type->getColor1(),
+          'color2'  => $type->getColor2()
       ])->where([
         'id' => $type->getId()
       ]);

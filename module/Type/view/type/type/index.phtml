@@ -1,31 +1,54 @@
-<h3>Type</h3>
-<a class="btn btn-primary" href="<?php echo $this->url("type_add"); ?>">Ajouter un Type !</a>
+<h1>Liste des Types</h1>
 
 <?php if (!empty($this->types)) : ?>
-    <?php foreach ($this->types as $type) : ?>
-        <hr />
-        <div class="row">
-            <div class="col-md-5">
-                <strong>
-                    <a href="<?php echo $this->url(
-                      'type_show', [
-                        'typeName' => $type->getName()
-                      ]); ?>">
-                      <?php echo $this->escapeHtml($type->getName()); ?>
-                    </a>
-                </strong>
-            </div>
-        </div>
-    <?php endforeach; ?>
-<?php else : ?>
-    <div>Aucun Type à afficher</div>
-<?php endif; ?>
-<hr />
-<?php
-    echo $this->paginationControl(
-      $this->types,
-      'Sliding',
-      'partial/pagination',
-      ['route' => 'type_home/paged']
+
+  <?php
+  echo $this->paginationControl(
+    $this->types,
+    'Sliding',
+    'partial/pagination',
+    ['route' => 'type_home/paged']
     );
-?>
+    ?>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Nom</td>
+          <td>Couleur 1</td>
+          <td>Couleur 2</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->types as $type) : ?>
+          <tr>
+            <td><?php echo $this->escapeHtml($type->getName()); ?></td>
+            <td style="color:#<?php echo $this->escapeHtml($type->getColor1()); ?>;"><?php echo $this->escapeHtml($type->getColor1()); ?></td>
+            <td style="color:#<?php echo $this->escapeHtml($type->getColor2()); ?>;"><?php echo $this->escapeHtml($type->getColor2()); ?></td>
+            <td>
+              <a class="btn btn-primary" href="<?php echo $this->url('type_show', ['typeName' => $type->getName()]) ;?>">
+                <i class="glyphicon glyphicon-eye-open"></i> Afficher
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-warning" href="<?php echo $this->url('type_edit', ['typeId' => $type->getId()]) ;?>">
+                <i class="glyphicon glyphicon-pencil"></i> Modifier
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="<?php echo $this->url('type_delete', ['typeId' => $type->getId()]) ;?>">
+                <i class="glyphicon glyphicon-remove"></i> Supprimer
+              </a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  <?php else : ?>
+    <div>Aucun Type à afficher</div>
+  <?php endif; ?>
+
+  <p>
+    <a class="btn btn-success" href="<?php echo $this->url('type_add') ;?>">
+      <i class="glyphicon glyphicon-plus"></i> Ajouter un Type
+    </a>
+  </p>

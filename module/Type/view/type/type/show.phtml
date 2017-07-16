@@ -1,10 +1,18 @@
 <?php
 $type = $this->type;
 ?>
-<h1><?php echo $this->escapeHtml($type->getName()); ?></h1>
-<a class="btn btn-primary" href="<?php echo $this->url('type_edit', ['typeId' => $type->getId()]); ?>">
-  <i class="glyphicon glyphicon-pencil"></i> Modifier
-</a>
-<a class="btn btn-danger" href="<?php echo $this->url('type_delete', ['typeId' => $type->getId()]) ;?>">
-  <i class="glyphicon glyphicon-remove"></i> supprimer
-</a>
+
+<h1>Fiche du Type : <?php echo $this->escapeHtml($type->getName()); ?></h1>
+
+<p><b>Nom : </b> <?php echo $this->escapeHtml($type->getName()); ?></p>
+<p><b>Couleur1 : </b> <span style="color:#<?php echo $this->escapeHtml($type->getColor1()); ?>;"><?php echo $this->escapeHtml($type->getColor1()); ?></span></p>
+<p><b>Couleur2 : </b> <span style="color:#<?php echo $this->escapeHtml($type->getColor2()); ?>;"><?php echo $this->escapeHtml($type->getColor2()); ?></span></p>
+
+<p>
+	<a class="btn btn-warning" href="<?php echo $this->url('type_edit', ['typeId' => $type->getId()]) ;?>">
+		<i class="glyphicon glyphicon-pencil"></i> Modifier
+	</a>
+	<a class="btn btn-danger" href="<?php echo $this->url('type_delete', ['typeId' => $type->getId()]) ;?>">
+		<i class="glyphicon glyphicon-remove"></i> Supprimer
+	</a>
+</p>
