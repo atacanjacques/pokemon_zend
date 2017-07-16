@@ -8,9 +8,7 @@ class Type
 
     protected $name;
 
-    protected $color1;
-
-    protected $color2;
+    protected $color;
 
     public function setId($id)
     {
@@ -33,23 +31,13 @@ class Type
     }
 
 
-    public function getColor1()
+    public function getColor()
     {
-      return $this->color1;
+      return $this->color;
     }
 
-    public function setColor1($color1)
+    public function setColor($color)
     {
-      $this->color1 = $color1;
-    }
-
-    public function getColor2()
-    {
-      return $this->color2;
-    }
-
-    public function setColor2($color2)
-    {
-      $this->color2 = $color2;
+      $this->color = $color;
     }
 }

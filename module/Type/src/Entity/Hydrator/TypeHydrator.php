@@ -16,8 +16,7 @@ class TypeHydrator implements HydratorInterface
       return [
         'id'        => $object->getId(),
         'name'      => $object->getName(),
-        'color1'      => $object->getColor1(),
-        'color2'      => $object->getColor2()
+        'color'      => $object->getColor()
       ];
   }
 
@@ -29,8 +28,7 @@ class TypeHydrator implements HydratorInterface
 
     $object->setId(isset($data['id']) ? intval($data['id']) : null);
     $object->setName(isset($data['name']) ? $data['name'] : null);
-    $object->setColor1(isset($data['color1']) ? $data['color1'] : null);
-    $object->setColor2(isset($data['color2']) ? $data['color2'] : null);
+    $object->setColor(isset($data['color']) ? $data['color'] : null);
 
     return $object;
   }

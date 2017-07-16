@@ -25,8 +25,7 @@ class TypeRepositoryImpl implements TypeRepository
       $insert = $sql->insert()
         ->values([
           'name'  => $type->getName(),
-          'color1'  => $type->getColor1(),
-          'color2'  => $type->getColor2()
+          'color'  => $type->getColor()
         ])
         ->into('type');
      $statement = $sql->prepareStatementForSqlObject($insert);
@@ -47,8 +46,7 @@ class TypeRepositoryImpl implements TypeRepository
       $select->columns([
           'id',
           'name',
-          'color1',
-          'color2'
+          'color'
       ])->from([
         't' => 'type'
       ]);
@@ -78,8 +76,7 @@ class TypeRepositoryImpl implements TypeRepository
       $select->columns([
           'id',
           'name',
-          'color1',
-          'color2'
+          'color'
       ])->from([
         't' => 'type'
       ]);
@@ -107,8 +104,7 @@ class TypeRepositoryImpl implements TypeRepository
       $select->columns([
           'id',
           'name',
-          'color1',
-          'color2'
+          'color'
       ])->from([
         't' => 'type'
       ])
@@ -135,8 +131,7 @@ class TypeRepositoryImpl implements TypeRepository
     $select->columns([
           'id',
           'name',
-          'color1',
-          'color2'
+          'color'
       ])->from([
         't' => 'type'
       ])
@@ -162,8 +157,7 @@ class TypeRepositoryImpl implements TypeRepository
     $update = $sql->update('type')
       ->set([
         'name'        => $type->getName(),
-          'color1'  => $type->getColor1(),
-          'color2'  => $type->getColor2()
+          'color'  => $type->getColor()
       ])->where([
         'id' => $type->getId()
       ]);

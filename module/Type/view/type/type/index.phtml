@@ -22,8 +22,7 @@
         <?php foreach ($this->types as $type) : ?>
           <tr>
             <td><?php echo $this->escapeHtml($type->getName()); ?></td>
-            <td style="color:#<?php echo $this->escapeHtml($type->getColor1()); ?>;"><?php echo $this->escapeHtml($type->getColor1()); ?></td>
-            <td style="color:#<?php echo $this->escapeHtml($type->getColor2()); ?>;"><?php echo $this->escapeHtml($type->getColor2()); ?></td>
+            <td><span class="label" style="background: <?php echo $this->escapeHtml($type->getColor()); ?>;"><?php echo $this->escapeHtml($type->getColor()); ?></span></td>
             <td>
               <a class="btn btn-primary" href="<?php echo $this->url('type_show', ['typeName' => $type->getName()]) ;?>">
                 <i class="glyphicon glyphicon-eye-open"></i> Afficher

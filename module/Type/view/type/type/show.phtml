@@ -5,8 +5,7 @@ $type = $this->type;
 <h1>Fiche du Type : <?php echo $this->escapeHtml($type->getName()); ?></h1>
 
 <p><b>Nom : </b> <?php echo $this->escapeHtml($type->getName()); ?></p>
-<p><b>Couleur1 : </b> <span style="color:#<?php echo $this->escapeHtml($type->getColor1()); ?>;"><?php echo $this->escapeHtml($type->getColor1()); ?></span></p>
-<p><b>Couleur2 : </b> <span style="color:#<?php echo $this->escapeHtml($type->getColor2()); ?>;"><?php echo $this->escapeHtml($type->getColor2()); ?></span></p>
+<p><b>Couleur : </b> <span class="label" style="background: <?php echo $this->escapeHtml($type->getColor()); ?>;"><?php echo $this->escapeHtml($type->getColor()); ?></span></p>
 
 <p>
 	<a class="btn btn-warning" href="<?php echo $this->url('type_edit', ['typeId' => $type->getId()]) ;?>">

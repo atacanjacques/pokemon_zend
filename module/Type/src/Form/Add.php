@@ -22,13 +22,9 @@ class Add extends Form
     $name->setLabel('Nom');
     $name->setAttribute('class', 'form-control');
 
-    $color1 = new Element\Text('color1');
-    $color1->setLabel('Couleur 1');
-    $color1->setAttribute('class', 'form-control');
-
-    $color2 = new Element\Text('color2');
-    $color2->setLabel('Couleur 2');
-    $color2->setAttribute('class', 'form-control');
+    $color = new Element\Color('color');
+    $color->setLabel('Couleur');
+    $color->setAttribute('class', 'form-control');
 
     $submit = new Element\Submit('submit');
     $submit->setValue('Ajouter le Type !');
@@ -36,8 +32,7 @@ class Add extends Form
 
     $this->add($name);
     $this->add($name);
-    $this->add($color1);
-    $this->add($color2);
+    $this->add($color);
     $this->add($submit);
   }
 }
