@@ -32,4 +32,5 @@ return [
     'Pokemon',
     'Type',
     'Location',
+    'User',
 ];

@@ -12,5 +12,13 @@
  */
 
 return [
-    // ...
+    'service_manager' => [
+        'factories' => [
+            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'Zend\Authentication\AuthenticationService' => function(\Zend\ServiceManager\ServiceManager $sm) {
+                $userService = $sm->get('User\Service\UserService');
+                return $userService->getAuthenticationService();
+            }
+        ]
+    ]
 ];

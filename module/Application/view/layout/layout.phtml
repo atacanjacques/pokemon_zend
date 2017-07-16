@@ -38,8 +38,20 @@
             <li><a href="<?= $this->url('type_home') ?>">Type</a></li>
             <li><a href="<?= $this->url('location_home') ?>">Location</a></li>
         </ul>
+
         <ul class="nav navbar-nav navbar-right">
-            <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+            <?php
+            if($this->identity()){
+                ?>
+                <li><a href="<?= $this->url('user_logout') ?>"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
+                <?php
+            }
+            else{
+                ?>
+                <li><a href="<?= $this->url('user_login') ?>"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+                <?php
+            }
+            ?>
         </ul>
     </div>
 </div>
