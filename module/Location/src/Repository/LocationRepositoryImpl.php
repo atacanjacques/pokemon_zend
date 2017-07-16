@@ -74,6 +74,10 @@ class LocationRepositoryImpl implements LocationRepository
 
   public function fetchAllRecentAndPokemonId($pokemonId)
   {
+    $date = date('Y-m-d H:i:s');
+    $date = strtotime($date . ' -30 minutes');
+    $date = date('Y-m-d H:i:s', $date);
+
       $sql = new \Zend\Db\Sql\Sql($this->adapter);
       $select = $sql->select();
       $select->columns([
@@ -88,7 +92,7 @@ class LocationRepositoryImpl implements LocationRepository
       ->where(
         [
         'l.pokemon' => $pokemonId, 
-        "l.created_at >= '2017-07-16 22:16:14'"
+        "l.created_at >= '" . $date . "'"
         ]
       );
 

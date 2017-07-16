@@ -115,23 +115,51 @@ if($locations){
 	</div>
 
 	<script>
+
 		$(document).ready(function(){
 			var cardHeight = $(".pokemon-card").height();
 			$("#map").height(cardHeight);
 			initMap();
 		});
 
-		function initMap(){
-			var uluru = {lat: -25.363, lng: 131.044};
+
+		function initMap() {
+
 			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 4,
-				center: uluru
+				zoom: 12,
+				center: <?php echo '{lat: ' . $locations[0]->getLat() . ', lng: ' . $locations[0]->getLong() . '}'; ?>
 			});
-			var marker = new google.maps.Marker({
-				position: uluru,
-				map: map
+
+			var markers = locations.map(function(location) {
+				var icon = {
+					url: 'http://assets.pokemon.com/assets/cms2/img/pokedex/full/<?php echo $this->escapeHtml($pokemon->getNationalId()); ?>.png',
+					scaledSize: new google.maps.Size(60, 60)
+				};
+
+				return new google.maps.Marker({
+					position: location,
+					icon: icon
+				});
 			});
+
+			var markerCluster = new MarkerClusterer(map, markers,
+				{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}
+		var locations = [
+		<?php
+		$i = 0;
+		$len = count($locations) - 1;
+		foreach ($locations as $location){
+			echo '{lat: ' . $location->getLat() . ', lng: ' . $location->getLong() . '}';
+			if($i != $len){
+				echo ",";
+			}
+			$i++;
+		}
+		?>
+		]
+	</script>
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 	</script>
 	<script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6nU3cFXFj81IyqKXDGTsKlJwja4yMiQs&callback=initMap">

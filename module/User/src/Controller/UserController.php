@@ -53,6 +53,6 @@ class UserController extends AbstractActionController
     $authenticationService = $this->userService->getAuthenticationService();
     $authenticationService->clearIdentity();
 
-    return $this->redirect()->toRoute('user_login');
+    return $this->redirect()->toRoute('pokemon_home');
   }
 }
