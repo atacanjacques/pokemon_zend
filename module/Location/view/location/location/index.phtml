@@ -1,31 +1,67 @@
-<h3>Location</h3>
-<a class="btn btn-primary" href="<?php echo $this->url("location_add"); ?>">Ajouter un Location !</a>
+<h1>Liste des localisations</h1>
 
 <?php if (!empty($this->locations)) : ?>
-    <?php foreach ($this->locations as $location) : ?>
-        <hr />
-        <div class="row">
-            <div class="col-md-5">
-                <strong>
-                    <a href="<?php echo $this->url(
-                      'location_show', [
-                        'locationId' => $location->getId()
-                      ]); ?>">
-                      <?php echo $this->escapeHtml($location->getId()); ?>
-                    </a>
-                </strong>
-            </div>
-        </div>
-    <?php endforeach; ?>
-<?php else : ?>
-    <div>Aucun Location à afficher</div>
-<?php endif; ?>
-<hr />
-<?php
-    echo $this->paginationControl(
-      $this->locations,
-      'Sliding',
-      'partial/pagination',
-      ['route' => 'location_home/paged']
+
+  <?php
+  echo $this->paginationControl(
+    $this->locations,
+    'Sliding',
+    'partial/pagination',
+    ['route' => 'location_home/paged']
     );
-?>
+    ?>
+    <table class="table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>Pokémon</td>
+          <td>Latitude</td>
+          <td>Longitude</td>
+          <td>Date d'ajout</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->locations as $location) : ?>
+          <?php
+          foreach($pokemons as $pokemon){
+            if($pokemon->getId() == intval($location->getPokemon())){
+              $the_pokemon = $pokemon;
+            }
+          }
+          ?>
+          <tr>
+            <td><img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/<?php echo $this->escapeHtml($the_pokemon->getNationalId()); ?>.png" style="width: 40px;height: 40px;" /></td>
+
+            <td><?php echo $this->escapeHtml($the_pokemon->getName()); ?></td>
+            <td><?php echo $this->escapeHtml($location->getLat()); ?></td>
+            <td><?php echo $this->escapeHtml($location->getLong()); ?></td>
+            <?php $date = new DateTime($location->getCreatedAt()); ?>
+            <td>Vu à <b><?php echo $date->format('H:i'); ?></b> le <b><?php echo $date->format('d/m/Y'); ?></b></td>
+            <td>
+              <a class="btn btn-primary" href="<?php echo $this->url('location_show', ['locationId' => $location->getId()]) ;?>">
+                <i class="glyphicon glyphicon-eye-open"></i> Afficher
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-warning" href="<?php echo $this->url('location_edit', ['locationId' => $location->getId()]) ;?>">
+                <i class="glyphicon glyphicon-pencil"></i> Modifier
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="<?php echo $this->url('location_delete', ['locationId' => $location->getId()]) ;?>">
+                <i class="glyphicon glyphicon-remove"></i> Supprimer
+              </a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  <?php else : ?>
+    <div>Aucune localisation à afficher</div>
+  <?php endif; ?>
+
+  <p>
+    <a class="btn btn-success" href="<?php echo $this->url('location_add') ;?>">
+      <i class="glyphicon glyphicon-plus"></i> Ajouter une localisation
+    </a>
+  </p>

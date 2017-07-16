@@ -1,10 +1,28 @@
 <?php
 $location = $this->location;
+
+foreach($this->pokemons as $pokemon){
+	if($pokemon->getId() == intval($location->getPokemon())){
+		$the_pokemon = $pokemon;
+	}
+}
 ?>
-<h1><?php echo $this->escapeHtml($location->getId()); ?></h1>
-<a class="btn btn-primary" href="<?php echo $this->url('location_edit', ['locationId' => $location->getId()]); ?>">
-  <i class="glyphicon glyphicon-pencil"></i> Modifier
-</a>
-<a class="btn btn-danger" href="<?php echo $this->url('location_delete', ['locationId' => $location->getId()]) ;?>">
-  <i class="glyphicon glyphicon-remove"></i> supprimer
-</a>
+
+<h1>Localisation du Pokémon : <?php echo $this->escapeHtml($the_pokemon->getName()); ?></h1>
+
+<p>
+	<img src="http://assets.pokemon.com/assets/cms2/img/pokedex/detail/<?php echo $this->escapeHtml($the_pokemon->getNationalId()); ?>.png" />
+</p>
+<p><b>Nom : </b> <?php echo $this->escapeHtml($the_pokemon->getName()); ?></p>
+<p><b>Latitude : </b><?php echo $this->escapeHtml($location->getLat()); ?></p>
+<p><b>Longitude : </b><?php echo $this->escapeHtml($location->getLong()); ?></p>
+<?php $date = new DateTime($location->getCreatedAt()); ?>
+<p><b>Date : </b>Vu à <b><?php echo $date->format('H:i'); ?></b> le <b><?php echo $date->format('d/m/Y'); ?></b></p>
+<p>
+	<a class="btn btn-warning" href="<?php echo $this->url('location_edit', ['locationId' => $location->getId()]) ;?>">
+		<i class="glyphicon glyphicon-pencil"></i> Modifier
+	</a>
+	<a class="btn btn-danger" href="<?php echo $this->url('location_delete', ['locationId' => $location->getId()]) ;?>">
+		<i class="glyphicon glyphicon-remove"></i> Supprimer
+	</a>
+</p>

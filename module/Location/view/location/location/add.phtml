@@ -1,26 +1,46 @@
-<h3>Ajout d'un Location</h3>
-
 <?php
-  $form = $this->form;
-  $form->prepare();
-  echo $this->form()->openTag($form);
+$form = $this->form;
+$form->prepare();
 ?>
-<div class="form-group">
-  <?php echo $this->formRow($form->get('pokemon')); ?>
+<h1>Ajout d'une localisation</h1>
+<?php
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('pokemon')); ?>
+		</p>
+	</div>
 </div>
-<div class="form-group">
-  <?php echo $this->formRow($form->get('long')); ?>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('lat')); ?>
+		</p>
+	</div>
 </div>
-<div class="form-group">
-  <?php echo $this->formRow($form->get('lat')); ?>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<?php echo $this->formRow($form->get('long')); ?>
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-lg-5">
+		<p>
+			<button type="button" id="findLocation" class="btn btn-success">Rafraichir ma position</button>
+		</p>
+	</div>
 </div>
 
-<?php echo $this->formSubmit($form->get('submit')); ?>
+<p>
+	<?php echo $this->formSubmit($form->get('submit')); ?>
+
+</p>
+
 <?php echo $this->form()->closeTag(); ?>
-
-<br>
-
-<button type="button" id="findLocation" class="btn btn-success">Rafraichir ma position</button>
 
 <script>
 	var url = "https://www.googleapis.com/geolocation/v1/geolocate?key=";

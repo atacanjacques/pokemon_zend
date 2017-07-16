@@ -23,15 +23,22 @@ class LocationController extends AbstractActionController
 
   public function indexAction()
   {
-      $locations = $this->locationService->fetch(
-          $this->params()->fromRoute('page')
+    $locations = $this->locationService->fetch(
+      $this->params()->fromRoute('page')
       );
 
-      $variables = [
-        'locations' => $locations
-      ];
+    $pokemons = $this->pokemonService->fetchAll();
+    $allPokemons = [0 => "Aucun"];
+    foreach($pokemons as $pokemon){
+      $allPokemons[$pokemon->getId()] = $pokemon->getName();
+    }
 
-      return new ViewModel($variables);
+    $variables = [
+    'locations' => $locations,
+    'pokemons' => $pokemons
+    ];
+
+    return new ViewModel($variables);
   }
 
   public function addAction()
@@ -42,27 +49,26 @@ class LocationController extends AbstractActionController
       $allPokemons[$pokemon->getId()] = $pokemon->getName();
     }
 
-
     $form = new Add($allPokemons);
 
     $variables = [
-      'form' => $form
+    'form' => $form
     ];
 
     if ($this->request->isPost()) {
-        $locationPost = new Location();
-        $form->bind($locationPost);
+      $locationPost = new Location();
+      $form->bind($locationPost);
 
-        $form->setInputFilter(new AddLocation());
+      $form->setInputFilter(new AddLocation());
 
-        $data = $this->request->getPost();
-        $form->setData($data);
+      $data = $this->request->getPost();
+      $form->setData($data);
 
-        if ($form->isValid()) {
-          $this->locationService->save($locationPost);
+      if ($form->isValid()) {
+        $this->locationService->save($locationPost);
 
-          return $this->redirect()->toRoute('location_home');
-        }
+        return $this->redirect()->toRoute('location_home');
+      }
     }
 
     return new ViewModel($variables);
@@ -72,13 +78,24 @@ class LocationController extends AbstractActionController
   {
     $location = $this->locationService->find(
       $this->params()->fromRoute('locationId')
-    );
+      );
+
+    $pokemons = $this->pokemonService->fetchAll();
+    $allPokemons = [0 => "Aucun"];
+    foreach($pokemons as $pokemon){
+      $allPokemons[$pokemon->getId()] = $pokemon->getName();
+    }
 
     if (is_null($location)) {
       $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
     }
 
-    return new ViewModel(['location' => $location]);
+    $variables = [
+    'location' => $location,
+    'pokemons' => $pokemons
+    ];
+
+    return new ViewModel($variables);
   }
 
   public function deleteAction()
@@ -113,17 +130,17 @@ class LocationController extends AbstractActionController
     }
     else
     {
-        $location = $this->locationService
-          ->findById(
-            $this->params()->fromRoute('locationId')
+      $location = $this->locationService
+      ->findById(
+        $this->params()->fromRoute('locationId')
         );
-        if (is_null($location)) {
-          $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-        } else {
-          $form->bind($location);
-          $form->get('id')->setValue($location->getId());
-        }
+      if (is_null($location)) {
+        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+      } else {
+        $form->bind($location);
+        $form->get('id')->setValue($location->getId());
       }
+    }
     return new ViewModel($variables);
   }
 }
