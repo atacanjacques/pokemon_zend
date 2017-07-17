@@ -82,6 +82,18 @@ return [
           ]
         ]
       ],
+
+      // api location
+      'api_location_add' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/location/add',
+          'defaults' => [
+            'controller'  => 'Location\Controller\Api',
+            'action'      => 'add'
+          ]
+        ]
+      ],
     ]
   ],
 
@@ -89,6 +101,7 @@ return [
   'controllers' => [
     'factories' => [
       'Location\Controller\Location' => 'Location\Controller\LocationControllerFactory',
+      'Location\Controller\Api' => 'Location\Controller\ApiControllerFactory',
     ]
   ],
 
