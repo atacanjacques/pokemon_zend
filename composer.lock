@@ -573,16 +573,16 @@
         },
         {
             "name": "zendframework/zend-crypt",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-crypt.git",
-                "reference": "274cdcb77a2165d6aff36b606e9d1c687ba9386c"
+                "reference": "514cef5556bac069e36c2cbded40e529b86bb3f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/274cdcb77a2165d6aff36b606e9d1c687ba9386c",
-                "reference": "274cdcb77a2165d6aff36b606e9d1c687ba9386c",
+                "url": "https://api.github.com/repos/zendframework/zend-crypt/zipball/514cef5556bac069e36c2cbded40e529b86bb3f2",
+                "reference": "514cef5556bac069e36c2cbded40e529b86bb3f2",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +620,7 @@
                 "crypt",
                 "zf2"
             ],
-            "time": "2016-12-06T15:33:37+00:00"
+            "time": "2017-07-17T15:46:00+00:00"
         },
         {
             "name": "zendframework/zend-db",

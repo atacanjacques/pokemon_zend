@@ -64,7 +64,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
-      // $hydrator->add(new CategoryHydrator());
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
       $resultSet->initialize($result);
 
@@ -96,7 +95,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
-      // $hydrator->add(new CategoryHydrator());
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
 
         $paginatorAdapter = new \Zend\Paginator\Adapter\DbSelect(
@@ -106,7 +104,7 @@ class PokemonRepositoryImpl implements PokemonRepository
           );
           $paginator = new \Zend\Paginator\Paginator($paginatorAdapter);
           $paginator->setCurrentPageNumber($page);
-          $paginator->setItemCountPerPage(5);
+          $paginator->setItemCountPerPage(12);
 
           return $paginator;
   }
@@ -135,7 +133,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
       $hydrator = new AggregateHydrator();
       $hydrator->add(new PokemonHydrator());
-      // $hydrator->add(new CategoryHydrator());
 
       $resultSet = new HydratingResultSet($hydrator, new Pokemon());
       $resultSet->initialize($results);
@@ -167,7 +164,6 @@ class PokemonRepositoryImpl implements PokemonRepository
 
     $hydrator = new AggregateHydrator();
     $hydrator->add(new PokemonHydrator());
-    // $hydrator->add(new CategoryHydrator());
 
     $resultSet = new HydratingResultSet($hydrator, new Pokemon());
     $resultSet->initialize($results);
