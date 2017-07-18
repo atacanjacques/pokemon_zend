@@ -26,7 +26,8 @@ class LocationRepositoryImpl implements LocationRepository
         ->values([
         'pokemon'      => $location->getPokemon(),
         'lat'      => $location->getLat(),
-        'long'      => $location->getLong()
+        'long'      => $location->getLong(),
+        'created_at'      => date('Y-m-d H:i:s')
         ])
         ->into('location');
      $statement = $sql->prepareStatementForSqlObject($insert);

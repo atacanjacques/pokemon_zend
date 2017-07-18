@@ -31,7 +31,7 @@ CREATE TABLE `location` (
   `pokemon` int(11) DEFAULT NULL,
   `lat` varchar(50) DEFAULT NULL,
   `long` varchar(50) DEFAULT NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP()
+  `created_at` DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
