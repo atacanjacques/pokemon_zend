@@ -76,8 +76,9 @@ class LocationController extends AbstractActionController
 
       if ($form->isValid()) {
         $this->locationService->save($locationPost);
+        $pokemon_name = $this->pokemonService->findById($locationPost->getPokemon())->getName();
 
-        return $this->redirect()->toRoute('location_home');
+        return $this->redirect()->toRoute('pokemon_show', ['pokemonName' => $pokemon_name]);
       }
     }
 
