@@ -23,25 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `api_keys`
---
-
-CREATE TABLE `api_keys` (
-  `id` int(11) NOT NULL,
-  `api_key` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `api_keys`
---
-
-INSERT INTO `api_keys` (`id`, `api_key`) VALUES
-(1, 'EOOojfUM5NdrYYQ8yhOxPMBzH25XGoF4'),
-(2, 'UgBtip8pDVyuMSJv2TUK6CeUHik9aSH4');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `location`
 --
 
@@ -287,12 +268,6 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`) VALUES
 --
 
 --
--- Index pour la table `api_keys`
---
-ALTER TABLE `api_keys`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `location`
 --
 ALTER TABLE `location`
@@ -320,11 +295,6 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour les tables exportées
 --
 
---
--- AUTO_INCREMENT pour la table `api_keys`
---
-ALTER TABLE `api_keys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `location`
 --
