@@ -180,7 +180,7 @@ INSERT INTO `pokemon` (`id`, `national_id`, `name`, `description`, `type1`, `typ
 (104, '104', 'Osselait', 'La maman d\'Osselait lui manque terriblement et il ne la reverra jamais. La lune le fait pleurer, car elle lui rappelle sa mère. Les taches sur le crâne que porte ce Pokémon sont les marques de ses larmes.', 15, 0, 0),
 (105, '105', 'Ossatueur', 'Ossatueur est la forme évoluée d\'Osselait. Il a surmonté le chagrin causé par la perte de sa maman et s\'est endurci. Le tempérament décidé et entier de ce Pokémon le rend très difficile à amadouer.', 15, 7, 104),
 (106, '106', 'Kicklee', 'Les jambes de Kicklee peuvent se contracter et s\'étirer à volonté. Grâce à ces jambes à ressort, il terrasse ses ennemis en les rouant de coups de pied. Après les combats, il masse ses jambes pour éviter de sentir la fatigue.', 2, 0, 0),
-(107, '107', 'Tygnon', 'On raconte que Tygnon dispose de l\'état d\'esprit d\'un boxeur qui s\'entraîne pour le championnat du monde. Ce Pokémon est doté d\'une ténacité à toute épreuve et n\'abandonne jamais face à l\'adversité.', 2, 0, 106),
+(107, '107', 'Tygnon', 'On raconte que Tygnon dispose de l\'état d\'esprit d\'un boxeur qui s\'entraîne pour le championnat du monde. Ce Pokémon est doté d\'une ténacité à toute épreuve et n\'abandonne jamais face à l\'adversité.', 2, 0, 0),
 (108, '108', 'Excelangue', 'Chaque fois qu\'Excelangue découvre quelque chose de nouveau, il le lèche. Sa mémoire est basée sur le goût et la texture des objets. Il n\'aime pas les choses acides.', 10, 0, 0),
 (109, '109', 'Smogo', 'Smogo est composé de substances toxiques. Il mélange des toxines et des détritus pour déclencher une réaction chimique générant un gaz très dangereux. Plus la température est élevée, plus la quantité de gaz est importante.', 12, 0, 0),
 (110, '110', 'Smogogo', 'Smogogo rétrécit ou gonfle ses deux corps pour mélanger les gaz toxiques qui s\'y trouvent. Lorsque les gaz sont bien mélangés, la toxine devient très puissante. Le Pokémon se putréfie aussi un peu plus.', 12, 0, 109),
@@ -224,7 +224,7 @@ INSERT INTO `pokemon` (`id`, `national_id`, `name`, `description`, `type1`, `typ
 (148, '148', 'Draco', 'Draco stocke une quantité d\'énergie considérable dans son corps. On raconte qu\'il peut modifier les conditions climatiques autour de lui en déchargeant l\'énergie contenue dans les cristaux de son cou et de sa queue.', 3, 0, 147),
 (149, '149', 'Dracolosse', 'Dracolosse est capable de faire le tour de la planète en seize heures à peine. C\'est un Pokémon au grand cœur qui ramène à bon port les navires perdus dans les tempêtes.', 3, 18, 148),
 (150, '150', 'Mewtwo', 'Mewtwo est un Pokémon créé par manipulation génétique. Cependant, bien que les connaissances scientifiques des humains aient réussi à créer son corps, elles n\'ont pas pu doter Mewtwo d\'un cœur sensible.', 13, 13, 0),
-(151, '151', 'Mew', 'On dit que Mew possède le code génétique de tous les autres Pokémon. Il peut se rendre invisible à sa guise, ce qui lui permet de ne pas se faire remarquer quand il s\'approche des gens.', 13, 0, 150);
+(151, '151', 'Mew', 'On dit que Mew possède le code génétique de tous les autres Pokémon. Il peut se rendre invisible à sa guise, ce qui lui permet de ne pas se faire remarquer quand il s\'approche des gens.', 13, 0, 0);
 
 -- --------------------------------------------------------
 
