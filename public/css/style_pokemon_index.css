@@ -1,3 +1,13 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
 .card-title{
 	width: 100%;
 	background-color: rgba(0,0,0,0.5);
@@ -6,12 +16,12 @@
 }
 
 #map{
-	    position: relative;
-    margin: .5rem 0 1rem 0;
-    background-color: #fff;
-    transition: box-shadow .25s;
-    border-radius: 2px;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+ position: relative;
+ margin: .5rem 0 1rem 0;
+ background-color: #fff;
+ transition: box-shadow .25s;
+ border-radius: 2px;
+ box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
 

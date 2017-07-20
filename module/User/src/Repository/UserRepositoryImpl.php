@@ -11,22 +11,6 @@ class UserRepositoryImpl implements UserRepository
 {
   use AdapterAwareTrait;
 
-  public function add(User $user)
-  {
-    $sql = new \Zend\Db\Sql\Sql($this->adapter);
-    $insert = $sql->insert()
-      ->values([
-        'first_name'  => $user->getFirstName(),
-        'last_name'   => $user->getLastName(),
-        'email'       => $user->getEmail(),
-        'password'    => $this->generatePassword($user->getPassword()),
-        'created'     => time()
-      ])->into('user');
-
-      $statement = $sql->prepareStatementForSqlObject($insert);
-      $statement->execute();
-  }
-
   public function generatePassword($clearPassword)
   {
     $encrypter = new Bcrypt();
