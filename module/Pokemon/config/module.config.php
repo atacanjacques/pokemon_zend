@@ -82,6 +82,60 @@ return [
           ]
         ]
       ],
+
+      // Api
+      'api_pokemon_home' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/pokemons',
+          'defaults' => [
+            'controller'  => 'Pokemon\Controller\PokemonApi',
+            'action'      => 'index'
+          ],
+        ],
+      ],
+      'api_pokemon_add' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/pokemon/add',
+          'defaults' => [
+            'controller'  => 'Pokemon\Controller\PokemonApi',
+            'action'      => 'add'
+          ]
+        ],
+        'priority' => 1
+      ],
+      'api_pokemon_edit' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/pokemon/edit',
+          'defaults' => [
+            'controller'  => 'Pokemon\Controller\PokemonApi',
+            'action'      => 'edit'
+          ]
+        ],
+      ],
+
+      'api_pokemon_delete' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/pokemon/delete',
+          'defaults' => [
+            'controller'  => 'Pokemon\Controller\PokemonApi',
+            'action'      => 'delete'
+          ]
+        ],
+      ],
+      'api_pokemon_show' => [
+        'type' => 'Literal',
+        'options' => [
+          'route' => '/api/pokemon/show',
+          'defaults' => [
+            'controller'  => 'Pokemon\Controller\PokemonApi',
+            'action'      => 'show'
+          ]
+        ],
+      ],
     ]
   ],
 
@@ -89,6 +143,7 @@ return [
   'controllers' => [
     'factories' => [
       'Pokemon\Controller\Pokemon' => 'Pokemon\Controller\PokemonControllerFactory',
+      'Pokemon\Controller\PokemonApi' => 'Pokemon\Controller\PokemonApiControllerFactory',
     ]
   ],
 

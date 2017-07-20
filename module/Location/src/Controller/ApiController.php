@@ -41,10 +41,10 @@ class ApiController extends AbstractActionController
       $locationPost->setLong($long);
 
       $this->locationService->save($locationPost);
-          return new JsonModel(['success']);
+      return new JsonModel(['success']);
     }
     else{
-          return new JsonModel(['error']);
+      return new JsonModel(['error']);
     }
 
   }

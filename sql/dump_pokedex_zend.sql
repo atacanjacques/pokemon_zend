@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 18 Juillet 2017 à 20:19
+-- Généré le :  Jeu 20 Juillet 2017 à 23:57
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -23,6 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `api_keys`
+--
+
+CREATE TABLE `api_keys` (
+  `id` int(11) NOT NULL,
+  `api_key` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `api_keys`
+--
+
+INSERT INTO `api_keys` (`id`, `api_key`) VALUES
+(1, 'EOOojfUM5NdrYYQ8yhOxPMBzH25XGoF4'),
+(2, 'UgBtip8pDVyuMSJv2TUK6CeUHik9aSH4');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `location`
 --
 
@@ -31,7 +50,7 @@ CREATE TABLE `location` (
   `pokemon` int(11) DEFAULT NULL,
   `lat` varchar(50) DEFAULT NULL,
   `long` varchar(50) DEFAULT NULL,
-  `created_at` DATETIME NULL
+  `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -268,6 +287,12 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`) VALUES
 --
 
 --
+-- Index pour la table `api_keys`
+--
+ALTER TABLE `api_keys`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `location`
 --
 ALTER TABLE `location`
@@ -295,6 +320,11 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour les tables exportées
 --
 
+--
+-- AUTO_INCREMENT pour la table `api_keys`
+--
+ALTER TABLE `api_keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `location`
 --
