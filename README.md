@@ -45,5 +45,5 @@ http://zend.devprod.fr/api/pokemon/edit?national_id=025&name=Pikachu&description
 ## Delete Pokemon
 
 ```bash
-http://pokedex.zend/api/pokemon/delete?name=Raichu
+http://zend.devprod.fr/api/pokemon/delete?name=Raichu
 ```
